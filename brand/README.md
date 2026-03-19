@@ -10,6 +10,7 @@ If you are an engineer looking for the pipeline architecture, you want [`../engi
 
 | File | What it is |
 |------|-----------|
+| [`VISION.md`](./VISION.md) | Product philosophy — the three pillars, who it's for, what it is not |
 | [`identity.html`](./identity.html) | Full brand sketch — open in a browser. Colours, type, logo variants, taglines, animated waveform, product moment. |
 | [`palette.md`](./palette.md) | Colour system with hex values, usage rules, and accessibility notes |
 | [`typography.md`](./typography.md) | Type system — fonts, weights, scale, usage contexts |

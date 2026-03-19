@@ -1032,7 +1032,9 @@ def midi_to_score(midi: pretty_midi.PrettyMIDI, output_dir: Path, stem_name: str
        CLIENTS & API
   ══════════════════════════════════════════ -->
   <div class="layer-label">Layer 4 · Clients &amp; API</div>
-  <p style="color:var(--muted);margin-bottom:48px;max-width:600px;">The API is the boundary between the pipeline and the outside world. All clients — web embeds, mobile SDKs, third-party integrations — speak to the same REST + WebSocket API. The API never re-processes; it only manages jobs and serves artifacts.</p>
+  <p style="color:var(--muted);margin-bottom:24px;max-width:600px;">The API is the boundary between the pipeline and the outside world. All clients — web embeds, mobile SDKs, third-party integrations — speak to the same REST + WebSocket API. The API never re-processes; it only manages jobs and serves artifacts.</p>
+  <p style="color:var(--muted);margin-bottom:24px;max-width:600px;"><strong style="color:var(--text)">All clients are thin API wrappers by design.</strong> No ML logic runs on client devices. Demucs requires a GPU; model weights are ~80MB; the pipeline must serve iOS, Android, web, Spotify, and Apple Music from a single implementation. The API-first approach is the only architecture that satisfies all of these constraints simultaneously. The mental model: this is exactly how game backend services work — Unity doesn't run matchmaking on-device, it calls an API. Auris Vive clients are the same. See <strong style="color:var(--text)">ADR-006</strong> for the full decision, all four options considered, and the on-device future consideration.</p>
+  <p style="color:var(--muted);margin-bottom:48px;max-width:600px;">Note for mobile SDK implementors: artifact downloads are binary files (FLAC stems, MIDI, MusicXML), not just JSON — the SDK must handle chunked binary downloads with progress reporting, which differs from a standard REST client pattern.</p>
 
   <!-- REST + WebSocket API -->
   <section class="section" id="client-api">

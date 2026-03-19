@@ -26,7 +26,7 @@ This repo contains everything that describes and defines Auris Vive — design, 
 |-----------|----------|---------------|
 | [`brand/`](./brand/) | Designers, artists, partners | Visual identity, colour palette, typography, brand voice |
 | [`engineering/`](./engineering/) | Engineers | Architecture decisions, pipeline design, stage specs |
-| [`VISION.md`](./VISION.md) | Everyone | Product philosophy, the three pillars, where this is going |
+| [`brand/VISION.md`](./brand/VISION.md) | Everyone | Product philosophy, the three pillars, where this is going |
 
 ---
 
@@ -44,7 +44,7 @@ Together: *the living ear.* Or read as a command: *hear it alive.*
 
 Early design and architecture phase. Core pipeline is being specified. Brand identity is in active development.
 
-See [`VISION.md`](./VISION.md) for product direction and [`engineering/README.md`](./engineering/README.md) for build status.
+See [`brand/VISION.md`](./brand/VISION.md) for product direction and [`engineering/README.md`](./engineering/README.md) for build status.
 
 ---
 

@@ -19,6 +19,7 @@ Architecture Decision Records capture *why* we chose what we chose. Read these b
 | ADR-003 | Drum stem transcription approach | 🔲 Pending |
 | ADR-004 | Score quantisation — strict vs expressive | 🔲 Pending |
 | ADR-005 | Multi-channel downmix algorithm | 🔲 Pending |
+| [ADR-006](./decisions/ADR-006-client-integration.md) | Client integration strategy — API-first, thin clients, on-device rationale | ✅ Written |
 
 ### Stage design documents (SDDs)
 
