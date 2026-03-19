@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Analysis Pipeline — Engineering Bundle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0b1120;
+    --navy2:   #121c30;
+    --navy3:   #1a2740;
+    --teal:    #00c9a7;
+    --teal2:   #00a888;
+    --purple:  #7c6af7;
+    --amber:   #f5a623;
+    --red:     #e05c5c;
+    --text:    #e2e8f0;
+    --muted:   #7a8fa6;
+    --border:  rgba(255,255,255,0.07);
+    --code-bg: #0d1726;
+    --tag-written:  #00c9a7;
+    --tag-pending:  #f5a623;
+    --tag-tbd:      #7a8fa6;
+    --sidebar-w: 260px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.75;
+    display: flex;
+  }
+
+  /* ── Sidebar ── */
+  #sidebar {
+    width: var(--sidebar-w);
+    min-height: 100vh;
+    background: var(--navy2);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    overflow-y: auto;
+    padding: 28px 0 40px;
+    z-index: 100;
+  }
+
+  .sb-logo {
+    padding: 0 20px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .sb-logo .project { font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
+  .sb-logo .title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+
+  .sb-section { padding: 0 20px; margin-bottom: 20px; }
+  .sb-label {
+    font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px; padding: 0 4px;
+  }
+
+  .sb-link {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 8px; border-radius: 6px;
+    text-decoration: none; color: var(--muted);
+    font-size: 13px; transition: all .15s;
+    margin-bottom: 1px;
+  }
+  .sb-link:hover { background: rgba(255,255,255,.05); color: var(--text); }
+  .sb-link.active { background: rgba(0,201,167,.1); color: var(--teal); }
+  .sb-link .dot {
+    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  }
+  .dot-written { background: var(--tag-written); }
+  .dot-pending { background: var(--tag-pending); }
+  .dot-tbd     { background: var(--tag-tbd); }
+
+  .sb-divider { border: none; border-top: 1px solid var(--border); margin: 16px 20px; }
+
+  /* ── Main content ── */
+  #main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    padding: 60px 64px;
+    max-width: calc(100% - var(--sidebar-w));
+  }
+
+  /* ── Hero ── */
+  .hero {
+    margin-bottom: 60px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: 38px; font-weight: 600; line-height: 1.15;
+    color: #fff; margin-bottom: 18px; letter-spacing: -.02em;
+  }
+  .hero-meta {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    font-size: 13px; color: var(--muted); margin-bottom: 28px;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .hero-meta strong { color: var(--text); }
+  .hero-desc { font-size: 16px; color: var(--muted); max-width: 620px; line-height: 1.7; }
+
+  .doc-index {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    margin-top: 36px;
+  }
+  .doc-card {
+    background: var(--navy2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .doc-card .doc-id { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--teal); margin-bottom: 4px; }
+  .doc-card .doc-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .doc-card .doc-status { font-size: 11px; }
+
+  /* ── Status tags ── */
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  }
+  .tag-written { background: rgba(0,201,167,.15); color: var(--teal); }
+  .tag-pending { background: rgba(245,166,35,.15); color: var(--amber); }
+  .tag-tbd     { background: rgba(122,143,166,.12); color: var(--muted); }
+
+  /* ── Section ── */
+  .section { margin-bottom: 72px; }
+  .section-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 16px; margin-bottom: 24px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-id {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    color: var(--teal); margin-bottom: 6px;
+  }
+  .section h2 {
+    font-size: 24px; font-weight: 600; color: #fff; letter-spacing: -.01em;
+  }
+  .section h3 {
+    font-size: 17px; font-weight: 600; color: var(--text);
+    margin: 28px 0 12px; letter-spacing: -.01em;
+  }
+  .section h4 {
+    font-size: 14px; font-weight: 600; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .06em; margin: 24px 0 10px;
+  }
+  .section p { color: var(--muted); margin-bottom: 14px; }
+  .section p strong { color: var(--text); font-weight: 500; }
+
+  /* ── SVG diagram card ── */
+  .diagram-card {
+    background: var(--navy2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 32px; margin: 32px 0;
+    overflow: hidden;
+  }
+  .diagram-card svg { width: 100%; height: auto; display: block; }
+
+  /* ── Code blocks ── */
+  pre {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px; overflow-x: auto;
+    margin: 16px 0; font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px; line-height: 1.65; color: #a8c4e0;
+  }
+  code { font-family: 'IBM Plex Mono', monospace; font-size: 13px; }
+  p code, li code {
+    background: rgba(0,201,167,.08); color: var(--teal);
+    padding: 1px 6px; border-radius: 4px; font-size: 12.5px;
+  }
+
+  .code-label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: .1em; color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  /* ── Tables ── */
+  .tbl-wrap { overflow-x: auto; margin: 16px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left; padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted); font-weight: 500; font-size: 11px;
+    text-transform: uppercase; letter-spacing: .08em;
+  }
+  td {
+    padding: 10px 14px; border-bottom: 1px solid var(--border);
+    color: var(--muted); vertical-align: top;
+  }
+  td:first-child { color: var(--text); font-weight: 500; }
+  tr:last-child td { border-bottom: none; }
+
+  /* ── Callout boxes ── */
+  .callout {
+    border-left: 3px solid; border-radius: 0 8px 8px 0;
+    padding: 14px 18px; margin: 20px 0; font-size: 14px;
+  }
+  .callout-open    { border-color: var(--amber); background: rgba(245,166,35,.07); }
+  .callout-risk    { border-color: var(--red);   background: rgba(224,92,92,.07); }
+  .callout-info    { border-color: var(--teal);  background: rgba(0,201,167,.06); }
+  .callout-label {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .12em; margin-bottom: 5px;
+  }
+  .callout-open .callout-label  { color: var(--amber); }
+  .callout-risk .callout-label  { color: var(--red); }
+  .callout-info .callout-label  { color: var(--teal); }
+  .callout p { margin: 0; }
+
+  /* ── Contract badge ── */
+  .contract {
+    background: var(--navy3); border: 1px solid rgba(0,201,167,.25);
+    border-radius: 10px; padding: 20px 24px; margin: 20px 0;
+  }
+  .contract-label {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .12em; color: var(--teal); margin-bottom: 10px;
+  }
+  .contract code { font-size: 14px; color: #c4e0f4; }
+
+  /* ── Subsection cards (adapters, outputs etc) ── */
+  .node-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .node-card {
+    background: var(--navy2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 22px;
+  }
+  .node-card h4 { margin: 0 0 8px; font-size: 13px; color: var(--text); text-transform: none; letter-spacing: 0; }
+  .node-card p { font-size: 13px; margin: 0; }
+
+  /* ── Lists ── */
+  ul, ol { padding-left: 20px; color: var(--muted); margin-bottom: 14px; }
+  li { margin-bottom: 4px; }
+  li strong { color: var(--text); font-weight: 500; }
+
+  /* ── Flow connector ── */
+  .flow {
+    display: flex; align-items: center; gap: 0;
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+    color: var(--muted); flex-wrap: wrap; margin: 20px 0;
+  }
+  .flow-box {
+    background: var(--navy2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 12px; color: var(--text);
+    white-space: nowrap;
+  }
+  .flow-box.active { border-color: var(--teal); color: var(--teal); background: rgba(0,201,167,.08); }
+  .flow-arrow { padding: 0 8px; color: var(--muted); }
+
+  /* ── Section divider ── */
+  .layer-label {
+    font-size: 10px; font-weight: 600; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--teal);
+    border-top: 1px solid var(--border); padding-top: 48px;
+    margin-bottom: 8px;
+  }
+
+  hr.spacer { border: none; border-top: 1px solid var(--border); margin: 60px 0; }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    #sidebar { display: none; }
+    #main { margin-left: 0; padding: 32px 24px; max-width: 100%; }
+    .doc-index { grid-template-columns: 1fr 1fr; }
+    .node-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ SIDEBAR ════════════════ -->
+<nav id="sidebar">
+  <div class="sb-logo">
+    <div class="project">Engineering Bundle</div>
+    <div class="title">Music Analysis Pipeline</div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Overview</div>
+    <a href="#overview" class="sb-link"><span class="dot dot-written"></span>System overview</a>
+    <a href="#pipeline-diagram" class="sb-link"><span class="dot dot-written"></span>Architecture diagram</a>
+    <a href="#data-contracts" class="sb-link"><span class="dot dot-written"></span>Data contracts</a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Input adapters</div>
+    <a href="#adapter-file" class="sb-link"><span class="dot dot-written"></span>File adapter</a>
+    <a href="#adapter-url" class="sb-link"><span class="dot dot-pending"></span>URL adapter</a>
+    <a href="#adapter-stream" class="sb-link"><span class="dot dot-tbd"></span>Stream adapter</a>
+    <a href="#adapter-device" class="sb-link"><span class="dot dot-tbd"></span>Device adapter</a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Core pipeline</div>
+    <a href="#stage-ingest" class="sb-link"><span class="dot dot-written"></span>Ingest</a>
+    <a href="#stage-separate" class="sb-link"><span class="dot dot-pending"></span>Separate</a>
+    <a href="#stage-transcribe" class="sb-link"><span class="dot dot-pending"></span>Transcribe</a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Outputs</div>
+    <a href="#output-stems" class="sb-link"><span class="dot dot-pending"></span>Stems</a>
+    <a href="#output-midi" class="sb-link"><span class="dot dot-pending"></span>MIDI</a>
+    <a href="#output-score" class="sb-link"><span class="dot dot-pending"></span>Score</a>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-label">Clients &amp; API</div>
+    <a href="#client-api" class="sb-link"><span class="dot dot-pending"></span>REST + WebSocket API</a>
+    <a href="#client-web" class="sb-link"><span class="dot dot-tbd"></span>Web embed</a>
+    <a href="#client-mobile" class="sb-link"><span class="dot dot-tbd"></span>Mobile SDK</a>
+  </div>
+
+  <hr class="sb-divider">
+
+  <div class="sb-section">
+    <div class="sb-label">Decisions</div>
+    <a href="#adr-001" class="sb-link"><span class="dot dot-written"></span>ADR-001 Stack</a>
+    <a href="#open-questions" class="sb-link"><span class="dot dot-pending"></span>Open questions</a>
+  </div>
+</nav>
+
+<!-- ════════════════ MAIN ════════════════ -->
+<main id="main">
+
+  <!-- ── Hero ── -->
+  <section class="hero" id="overview">
+    <div class="hero-eyebrow">SDD-001 · Architecture Overview</div>
+    <h1>Music Analysis<br>Pipeline</h1>
+    <div class="hero-meta">
+      <span><strong>Status</strong> &nbsp;<span class="tag tag-pending">In progress</span></span>
+      <span><strong>Version</strong> 0.1-draft</span>
+      <span><strong>Date</strong> 2026-03-19</span>
+      <span><strong>Relates to</strong> ADR-001</span>
+    </div>
+    <p class="hero-desc">
+      This bundle is the living engineering reference for the music analysis pipeline.
+      It covers every layer — from input adapters through source separation and transcription
+      to MIDI, score, and client delivery. Sections marked <span class="tag tag-pending">Pending</span>
+      are placeholders seeded with what we know; they need expansion before implementation begins.
+      Sections marked <span class="tag tag-tbd">TBD</span> need design decisions first.
+    </p>
+
+    <div class="doc-index">
+      <div class="doc-card">
+        <div class="doc-id">ADR-001</div>
+        <div class="doc-title">Technology stack</div>
+        <div class="doc-status"><span class="tag tag-written">Written</span></div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-id">SDD-001</div>
+        <div class="doc-title">Pipeline overview (this doc)</div>
+        <div class="doc-status"><span class="tag tag-pending">In progress</span></div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-id">SDD-002</div>
+        <div class="doc-title">Ingest stage</div>
+        <div class="doc-status"><span class="tag tag-written">Written</span></div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-id">SDD-003</div>
+        <div class="doc-title">Separate stage (Demucs)</div>
+        <div class="doc-status"><span class="tag tag-pending">Pending</span></div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-id">SDD-004</div>
+        <div class="doc-title">Transcribe stage (Basic Pitch)</div>
+        <div class="doc-status"><span class="tag tag-pending">Pending</span></div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-id">SDD-005</div>
+        <div class="doc-title">Score generation (music21)</div>
+        <div class="doc-status"><span class="tag tag-pending">Pending</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Architecture diagram ── -->
+  <section class="section" id="pipeline-diagram">
+    <div class="section-header">
+      <div>
+        <div class="section-id">§1 · Architecture</div>
+        <h2>System architecture</h2>
+      </div>
+      <span class="tag tag-written">Written</span>
+    </div>
+
+    <p>The pipeline is organised into four horizontal layers. Each layer communicates with the next through a single well-defined contract — no layer reaches past its immediate neighbour. This separation means adapters, processing stages, output serialisers, and client interfaces can all evolve independently.</p>
+
+    <div class="diagram-card" id="pipeline-diagram-svg">
+      <svg viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" style="font-family:'IBM Plex Sans',sans-serif;">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#7a8fa6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- Layer labels -->
+        <text x="340" y="22" text-anchor="middle" font-size="10" fill="#7a8fa6" letter-spacing="2" font-weight="600">INPUT ADAPTERS</text>
+
+        <!-- Adapter boxes -->
+        <rect x="40" y="32" width="130" height="44" rx="8" fill="#1a2740" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+        <text x="105" y="59" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="500">File adapter</text>
+
+        <rect x="185" y="32" width="130" height="44" rx="8" fill="#1a2740" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+        <text x="250" y="59" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="500">URL adapter</text>
+
+        <rect x="330" y="32" width="140" height="44" rx="8" fill="#1a2740" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+        <text x="400" y="59" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="500">Stream adapter</text>
+
+        <rect x="486" y="32" width="144" height="44" rx="8" fill="#1a2740" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+        <text x="558" y="59" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="500">Device adapter</text>
+
+        <!-- Arrow down to pipeline -->
+        <line x1="340" y1="76" x2="340" y2="100" stroke="#7a8fa6" stroke-width="1" marker-end="url(#arr)"/>
+
+        <!-- Core pipeline dashed container -->
+        <rect x="30" y="100" width="620" height="148" rx="12" fill="rgba(124,106,247,0.05)" stroke="rgba(124,106,247,0.2)" stroke-width="1" stroke-dasharray="6 4"/>
+        <text x="52" y="118" font-size="10" fill="#7c6af7" letter-spacing="2" font-weight="600">CORE PROCESSING PIPELINE</text>
+
+        <!-- Stage boxes -->
+        <rect x="50" y="126" width="168" height="60" rx="8" fill="rgba(124,106,247,0.12)" stroke="rgba(124,106,247,0.35)" stroke-width="0.5"/>
+        <text x="134" y="150" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="600">Ingest</text>
+        <text x="134" y="168" text-anchor="middle" font-size="11" fill="#7a8fa6">Decode · normalise</text>
+
+        <line x1="218" y1="156" x2="254" y2="156" stroke="#7c6af7" stroke-width="1" marker-end="url(#arr)"/>
+
+        <rect x="254" y="126" width="168" height="60" rx="8" fill="rgba(124,106,247,0.12)" stroke="rgba(124,106,247,0.35)" stroke-width="0.5"/>
+        <text x="338" y="150" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="600">Separate</text>
+        <text x="338" y="168" text-anchor="middle" font-size="11" fill="#7a8fa6">Demucs htdemucs</text>
+
+        <line x1="422" y1="156" x2="458" y2="156" stroke="#7c6af7" stroke-width="1" marker-end="url(#arr)"/>
+
+        <rect x="458" y="126" width="168" height="60" rx="8" fill="rgba(124,106,247,0.12)" stroke="rgba(124,106,247,0.35)" stroke-width="0.5"/>
+        <text x="542" y="150" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="600">Transcribe</text>
+        <text x="542" y="168" text-anchor="middle" font-size="11" fill="#7a8fa6">Basic Pitch → MIDI</text>
+
+        <!-- Arrow down to outputs -->
+        <line x1="340" y1="248" x2="340" y2="268" stroke="#7a8fa6" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="340" y="264" text-anchor="middle" font-size="10" fill="#7a8fa6" letter-spacing="2" font-weight="600"></text>
+
+        <text x="340" y="282" text-anchor="middle" font-size="10" fill="#00c9a7" letter-spacing="2" font-weight="600">OUTPUTS</text>
+
+        <!-- Output boxes -->
+        <rect x="60" y="292" width="168" height="60" rx="8" fill="rgba(0,201,167,0.08)" stroke="rgba(0,201,167,0.3)" stroke-width="0.5"/>
+        <text x="144" y="317" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="600">Stems</text>
+        <text x="144" y="335" text-anchor="middle" font-size="11" fill="#7a8fa6">WAV / FLAC per stem</text>
+
+        <rect x="256" y="292" width="168" height="60" rx="8" fill="rgba(0,201,167,0.08)" stroke="rgba(0,201,167,0.3)" stroke-width="0.5"/>
+        <text x="340" y="317" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="600">MIDI</text>
+        <text x="340" y="335" text-anchor="middle" font-size="11" fill="#7a8fa6">Per-instrument .mid</text>
+
+        <rect x="452" y="292" width="168" height="60" rx="8" fill="rgba(0,201,167,0.08)" stroke="rgba(0,201,167,0.3)" stroke-width="0.5"/>
+        <text x="536" y="317" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="600">Score</text>
+        <text x="536" y="335" text-anchor="middle" font-size="11" fill="#7a8fa6">MusicXML / PDF</text>
+
+        <!-- Arrows to clients -->
+        <line x1="144" y1="352" x2="144" y2="374" stroke="#7a8fa6" stroke-width="1" marker-end="url(#arr)"/>
+        <line x1="340" y1="352" x2="340" y2="374" stroke="#7a8fa6" stroke-width="1" marker-end="url(#arr)"/>
+        <line x1="536" y1="352" x2="536" y2="374" stroke="#7a8fa6" stroke-width="1" marker-end="url(#arr)"/>
+
+        <text x="340" y="390" text-anchor="middle" font-size="10" fill="#378add" letter-spacing="2" font-weight="600">CLIENTS</text>
+
+        <!-- Client boxes -->
+        <rect x="44" y="396" width="168" height="40" rx="8" fill="rgba(55,138,221,0.08)" stroke="rgba(55,138,221,0.3)" stroke-width="0.5"/>
+        <text x="128" y="421" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="500">Web embed</text>
+
+        <rect x="236" y="396" width="208" height="40" rx="8" fill="rgba(55,138,221,0.08)" stroke="rgba(55,138,221,0.3)" stroke-width="0.5"/>
+        <text x="340" y="421" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="500">REST + WS API</text>
+
+        <rect x="468" y="396" width="168" height="40" rx="8" fill="rgba(55,138,221,0.08)" stroke="rgba(55,138,221,0.3)" stroke-width="0.5"/>
+        <text x="552" y="421" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="500">Mobile SDK</text>
+      </svg>
+    </div>
+
+    <p>Color encodes layer: <strong>gray</strong> = input adapters (format-specific, swappable), <strong>purple</strong> = core processing (ML models), <strong>teal</strong> = outputs (standard formats), <strong>blue</strong> = client interfaces (API consumers).</p>
+  </section>
+
+  <!-- ── Data contracts ── -->
+  <section class="section" id="data-contracts">
+    <div class="section-header">
+      <div>
+        <div class="section-id">§2 · Contracts</div>
+        <h2>Inter-stage data contracts</h2>
+      </div>
+      <span class="tag tag-written">Written</span>
+    </div>
+
+    <p>Each handoff between layers is a typed contract. No stage may reach past its immediate neighbour. If a contract changes, only the two stages on either side are affected.</p>
+
+    <h3>Adapter → Ingest</h3>
+    <div class="contract">
+      <div class="contract-label">Contract</div>
+      <code>path: str  # absolute path to a local, readable audio file</code>
+    </div>
+    <p>Adapters are responsible for producing a path. They handle all network I/O, device capture, format detection, and temp-file management. Ingest does not know and does not care how the file arrived.</p>
+
+    <h3>Ingest → Separate</h3>
+    <div class="contract">
+      <div class="contract-label">Contract</div>
+      <code>np.ndarray  shape=(2, N)  dtype=float32  values∈[-1.0, 1.0]  sr=44100</code>
+    </div>
+    <p>A stereo float32 array at 44,100 Hz. This is the universal internal audio representation. <strong>Separate never reads a file</strong> — it always receives this array from Ingest.</p>
+
+    <h3>Separate → Transcribe</h3>
+    <div class="contract">
+      <div class="contract-label">Contract</div>
+      <code>dict[str, np.ndarray]  # keys: "drums" | "bass" | "vocals" | "other"</code><br>
+      <code># each value: shape=(2, N), dtype=float32, sr=44100</code>
+    </div>
+    <p>One stereo array per stem. Transcribe receives each stem independently and runs Basic Pitch on each. The drum stem is routed to onset detection, not pitch transcription (see ADR-003, pending).</p>
+
+    <h3>Transcribe → Outputs</h3>
+    <div class="contract">
+      <div class="contract-label">Contract</div>
+      <code>dict[str, pretty_midi.PrettyMIDI]  # one object per pitched stem</code>
+    </div>
+    <p>One <code>PrettyMIDI</code> object per stem. Outputs serialise these to <code>.mid</code> files, and pass them to <code>music21</code> for score generation. Stems are written to FLAC directly from the Separate output.</p>
+
+    <h3>Pipeline → API</h3>
+    <div class="contract">
+      <div class="contract-label">Contract</div>
+      <code>JobResult { stems: dict[str, Path], midi: dict[str, Path], score: dict[str, Path] }</code>
+    </div>
+    <p>The pipeline runner returns a <code>JobResult</code> with file paths for all produced artifacts. The API layer reads these paths and serves the files to clients. It does not re-process anything.</p>
+  </section>
+
+  <hr class="spacer">
+
+  <!-- ══════════════════════════════════════════
+       INPUT ADAPTERS
+  ══════════════════════════════════════════ -->
+  <div class="layer-label">Layer 1 · Input adapters</div>
+  <p style="color:var(--muted);margin-bottom:48px;max-width:600px;">Adapters are thin wrappers with one job: produce a path to a local audio file. The pipeline below never knows or cares how the audio arrived. Adding a new source is zero-impact on all downstream stages.</p>
+
+  <!-- File adapter -->
+  <section class="section" id="adapter-file">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Adapter · File</div>
+        <h2>File adapter</h2>
+      </div>
+      <span class="tag tag-written">Written</span>
+    </div>
+
+    <p>The simplest adapter. Accepts a local filesystem path, validates it, and returns it unchanged. All format detection and decoding is deferred to the Ingest stage via <code>librosa</code>.</p>
+
+    <h3>Supported formats</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Format</th><th>Extensions</th><th>Codec</th><th>Backend</th></tr></thead>
+        <tbody>
+          <tr><td>MP3</td><td>.mp3</td><td>MPEG Layer III (lossy)</td><td>audioread + FFmpeg</td></tr>
+          <tr><td>WAV</td><td>.wav</td><td>PCM 8/16/24/32-bit</td><td>soundfile (native)</td></tr>
+          <tr><td>FLAC</td><td>.flac</td><td>Free Lossless</td><td>soundfile (native)</td></tr>
+          <tr><td>AAC</td><td>.aac, .m4a</td><td>Advanced Audio Coding (lossy)</td><td>audioread + FFmpeg</td></tr>
+          <tr><td>OGG Vorbis</td><td>.ogg</td><td>Vorbis (lossy)</td><td>soundfile (native)</td></tr>
+          <tr><td>AIFF</td><td>.aiff, .aif</td><td>PCM (lossless)</td><td>soundfile (native)</td></tr>
+          <tr><td>MP4 audio</td><td>.mp4</td><td>AAC or ALAC</td><td>audioread + FFmpeg</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-risk">
+      <div class="callout-label">Dependency risk</div>
+      <p>MP3 and MP4 require FFmpeg in <code>$PATH</code>. Absence causes <code>audioread.NoBackendError</code> at runtime. The deployment image must install FFmpeg explicitly.</p>
+    </div>
+
+    <div class="code-label">Implementation</div>
+    <pre>from pathlib import Path
+
+SUPPORTED = {'.mp3','.wav','.flac','.aac','.m4a','.ogg','.aiff','.aif','.mp4'}
+
+def file_adapter(path: str) -> str:
+    p = Path(path)
+    if not p.exists():
+        raise AdapterError(f"File not found: {path}")
+    if not p.is_file():
+        raise AdapterError(f"Path is not a file: {path}")
+    if p.suffix.lower() not in SUPPORTED:
+        raise AdapterError(f"Unsupported format: {p.suffix}")
+    return str(p.resolve())</pre>
+  </section>
+
+  <!-- URL adapter -->
+  <section class="section" id="adapter-url">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Adapter · URL</div>
+        <h2>URL adapter</h2>
+      </div>
+      <span class="tag tag-pending">Pending design</span>
+    </div>
+
+    <p>Accepts a URL, downloads or extracts audio to a temp file, and returns the local path. The pipeline never touches a network socket — that is entirely this adapter's responsibility.</p>
+
+    <h3>Planned sources</h3>
+    <div class="node-grid">
+      <div class="node-card">
+        <h4>YouTube / SoundCloud / Spotify</h4>
+        <p>Use <code>yt-dlp</code> for YouTube and SoundCloud. Spotify requires a separate legal/auth consideration — flagged as open question.</p>
+      </div>
+      <div class="node-card">
+        <h4>Direct audio URLs</h4>
+        <p>Any direct link ending in a supported extension (.mp3, .wav, .flac etc). Use <code>httpx</code> with streaming download, size-limited to prevent abuse.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-URL-1</div>
+      <p>What is the maximum file size / duration we accept from URL inputs? This affects temp disk usage and Demucs inference time. Needs a product decision before implementation.</p>
+    </div>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-URL-2</div>
+      <p>Spotify streams require OAuth and are DRM-protected. Do we support Spotify URLs at all, or require users to upload local files for that source?</p>
+    </div>
+
+    <div class="code-label">Sketch (subject to change)</div>
+    <pre>import yt_dlp, tempfile, httpx
+from pathlib import Path
+
+def url_adapter(url: str) -> str:
+    tmp = tempfile.mkdtemp()
+    if is_youtube_or_soundcloud(url):
+        opts = {'format': 'bestaudio', 'outtmpl': f'{tmp}/%(id)s.%(ext)s',
+                'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'flac'}]}
+        with yt_dlp.YoutubeDL(opts) as ydl:
+            info = ydl.extract_info(url, download=True)
+        return str(Path(tmp) / f"{info['id']}.flac")
+    elif is_direct_audio_url(url):
+        # streaming download with size guard
+        ...
+    raise AdapterError(f"Unsupported URL source: {url}")</pre>
+  </section>
+
+  <!-- Stream adapter -->
+  <section class="section" id="adapter-stream">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Adapter · Stream</div>
+        <h2>Stream adapter</h2>
+      </div>
+      <span class="tag tag-tbd">TBD</span>
+    </div>
+
+    <p>Accepts a live audio stream over WebSocket, buffers it to a temp file, and passes the path to the pipeline once a sufficient window has been captured. This adapter is the most architecturally complex because the pipeline is currently batch-oriented — it processes a complete file, not a rolling buffer.</p>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-STREAM-1</div>
+      <p>Do we buffer the entire stream before processing (latency: full duration) or do we process in rolling windows (latency: window size, quality: lower)? This is a fundamental architecture decision. Rolling windows require a different pipeline variant — Demucs is not streaming-native.</p>
+    </div>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-STREAM-2</div>
+      <p>What audio codec does the WebSocket stream carry? Raw PCM, Opus, or something else? The adapter needs to handle codec negotiation or enforce a single format.</p>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-label">Recommendation</div>
+      <p>For v1, support stream buffering (capture full stream → write temp file → process as batch). Rolling-window streaming can be a v2 feature with a separate pipeline variant. This avoids blocking the batch pipeline design on streaming architecture decisions.</p>
+    </div>
+  </section>
+
+  <!-- Device adapter -->
+  <section class="section" id="adapter-device">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Adapter · Device</div>
+        <h2>Device adapter</h2>
+      </div>
+      <span class="tag tag-tbd">TBD</span>
+    </div>
+
+    <p>Captures audio from a microphone or line-in device, writes it to a temp file, and hands the path to the pipeline. Intended for instrument-to-score use cases — a musician plays into a microphone and receives a score of what they played.</p>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-DEV-1</div>
+      <p>Is device capture a server-side concern (capturing from a server microphone) or a client-side concern (browser captures audio via <code>MediaRecorder API</code>, then uploads)? Almost certainly client-side — which means this adapter is really a variant of the Stream or File adapter on the server, and the capture logic lives in the web embed SDK.</p>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-label">Recommendation</div>
+      <p>The web embed handles <code>MediaRecorder</code> capture and sends the resulting blob to the API as a file upload. The server-side adapter for this case is just the File adapter receiving an uploaded temp file. No separate server-side device adapter is needed.</p>
+    </div>
+  </section>
+
+  <hr class="spacer">
+
+  <!-- ══════════════════════════════════════════
+       CORE PIPELINE
+  ══════════════════════════════════════════ -->
+  <div class="layer-label">Layer 2 · Core processing pipeline</div>
+  <p style="color:var(--muted);margin-bottom:48px;max-width:600px;">Three sequential stages. Each stage is stateless — it receives a well-typed input, performs computation, and returns a well-typed output. No stage writes to disk; the pipeline runner handles all persistence.</p>
+
+  <!-- Ingest -->
+  <section class="section" id="stage-ingest">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Stage 1 · Ingest</div>
+        <h2>Ingest</h2>
+      </div>
+      <span class="tag tag-written">Written — see SDD-002</span>
+    </div>
+
+    <div class="flow">
+      <div class="flow-box active">File path</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box active">librosa.load()</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box active">Resample 44.1kHz</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box active">float32 [-1,1]</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box active">Ensure stereo</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box active">(2, N) array</div>
+    </div>
+
+    <p>Fully documented in <strong>SDD-002</strong>. Decodes any supported codec, resamples to 44,100 Hz, converts to float32, and upmixes mono to stereo. Returns an <code>np.ndarray</code> of shape <code>(2, N)</code>.</p>
+
+    <div class="callout callout-info">
+      <div class="callout-label">Key decisions (from SDD-002)</div>
+      <p>44,100 Hz target rate matches Demucs training data. float32 in [-1,1] is the universal ML internal format. Mono upmix duplicates the single channel. Clipping is detected and logged but not repaired.</p>
+    </div>
+  </section>
+
+  <!-- Separate -->
+  <section class="section" id="stage-separate">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Stage 2 · Separate</div>
+        <h2>Separate (Demucs)</h2>
+      </div>
+      <span class="tag tag-pending">Pending — SDD-003</span>
+    </div>
+
+    <div class="flow">
+      <div class="flow-box">(2, N) stereo array</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Demucs htdemucs</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">{ drums, bass, vocals, other }</div>
+    </div>
+
+    <h3>What Demucs does</h3>
+    <p>Demucs (<code>htdemucs</code> variant) is a hybrid neural network trained on the MUSDB18 dataset of professionally mixed music. It processes audio simultaneously in the waveform domain and the spectrogram domain — combining what both representations reveal about instrument identity — and produces four isolated stems. Each stem is a stereo float32 array at 44,100 Hz, same format as the input.</p>
+
+    <h3>The four stems</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Stem</th><th>Contains</th><th>Transcription path</th></tr></thead>
+        <tbody>
+          <tr><td>drums</td><td>Kick, snare, hi-hat, cymbals, toms</td><td>Onset detection (not pitch — see ADR-003)</td></tr>
+          <tr><td>bass</td><td>Bass guitar, synth bass</td><td>Basic Pitch → MIDI</td></tr>
+          <tr><td>vocals</td><td>Lead and backing vocals</td><td>Basic Pitch → MIDI (melody)</td></tr>
+          <tr><td>other</td><td>Guitar, piano, strings, all else</td><td>Basic Pitch → MIDI</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Performance profile</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Hardware</th><th>4-min track</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>CPU (modern)</td><td>~8–12 min</td><td>Too slow for synchronous API response</td></tr>
+          <tr><td>GPU (T4)</td><td>~25–40 sec</td><td>Acceptable for async job queue</td></tr>
+          <tr><td>GPU (A10G)</td><td>~10–15 sec</td><td>Good for near-real-time</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-risk">
+      <div class="callout-label">Risk · GPU dependency</div>
+      <p>Demucs on CPU is too slow for production use. GPU instances are required. This has significant infrastructure cost implications — see ADR-002 (pending) for GPU provisioning strategy.</p>
+    </div>
+
+    <div class="code-label">Implementation sketch</div>
+    <pre>from demucs.pretrained import get_model
+from demucs.apply import apply_model
+import torch, numpy as np
+
+def separate(audio: np.ndarray, device: str = "cuda") -> dict[str, np.ndarray]:
+    model = get_model("htdemucs")
+    model.to(device)
+    tensor = torch.tensor(audio).unsqueeze(0)   # (1, 2, N)
+    with torch.no_grad():
+        sources = apply_model(model, tensor)[0]  # (4, 2, N)
+    return {
+        name: sources[i].cpu().numpy()
+        for i, name in enumerate(model.sources)
+        # model.sources = ["drums", "bass", "other", "vocals"]
+    }</pre>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-SEP-1</div>
+      <p>Should the model be loaded once at worker startup (singleton, fast per-job) or loaded per job (slow, but safe for multi-process workers)? Singleton is the right answer for GPU workers but requires careful memory management.</p>
+    </div>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-SEP-2</div>
+      <p>Demucs produces an "other" stem that is a catch-all. For a song with piano, guitar, and strings, all three are mixed into one stem and then transcribed together. Is that acceptable quality, or do we need a more fine-grained separation model?</p>
+    </div>
+  </section>
+
+  <!-- Transcribe -->
+  <section class="section" id="stage-transcribe">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Stage 3 · Transcribe</div>
+        <h2>Transcribe (Basic Pitch)</h2>
+      </div>
+      <span class="tag tag-pending">Pending — SDD-004</span>
+    </div>
+
+    <div class="flow">
+      <div class="flow-box">Stem arrays (3 pitched)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Basic Pitch</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">PrettyMIDI objects</div>
+    </div>
+
+    <h3>What Basic Pitch does</h3>
+    <p>Basic Pitch (Spotify Research) is a neural network trained to perform polyphonic pitch detection — it can identify multiple simultaneous notes in an audio stream. Unlike classical methods like pYIN, it handles chords and layered notes. It accepts a mono or stereo audio array and returns a <code>PrettyMIDI</code> object containing detected notes with pitch, onset time, offset time, and velocity.</p>
+
+    <h3>Running per-stem, not on the full mix</h3>
+    <p>A key architectural decision: we run Basic Pitch on each stem independently, not on the full mix. A stem contains a much narrower range of timbres, which means fewer competing pitches for the model to disambiguate. This produces materially better MIDI quality at the cost of an extra Demucs step.</p>
+
+    <h3>Key parameters</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Parameter</th><th>Default</th><th>Effect</th></tr></thead>
+        <tbody>
+          <tr><td>onset_threshold</td><td>0.5</td><td>Minimum confidence to accept a note onset. Higher = fewer false notes.</td></tr>
+          <tr><td>frame_threshold</td><td>0.3</td><td>Minimum confidence per frame to sustain a note.</td></tr>
+          <tr><td>minimum_note_length</td><td>58ms</td><td>Filters out very short events that are likely detection artefacts.</td></tr>
+          <tr><td>minimum_frequency</td><td>32.7 Hz (C1)</td><td>Lower bound for pitch detection.</td></tr>
+          <tr><td>maximum_frequency</td><td>2093 Hz (C7)</td><td>Upper bound. Raise for piccolo/violin, leave for most instruments.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-TRX-1</div>
+      <p>Should thresholds be fixed per deployment, configurable per job, or tuned per stem type (e.g. lower onset threshold for bass, higher for vocals)? Per-stem tuning likely improves quality but adds complexity.</p>
+    </div>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-TRX-2</div>
+      <p>The drum stem has no stable pitch. What handles drum transcription? Options: (a) skip it entirely for now, (b) use onset detection only (beat times, no pitch), (c) use a dedicated drum transcription model like <code>ADTLib</code>. This is ADR-003.</p>
+    </div>
+
+    <div class="code-label">Implementation sketch</div>
+    <pre>from basic_pitch.inference import predict
+from basic_pitch import ICASSP_2022_MODEL_PATH
+import pretty_midi, numpy as np
+
+def transcribe(stem: np.ndarray, sr: int = 44100) -> pretty_midi.PrettyMIDI:
+    # Basic Pitch expects mono; mix down stereo stem
+    mono = stem.mean(axis=0) if stem.ndim == 2 else stem
+    _, midi_data, _ = predict(
+        mono,
+        ICASSP_2022_MODEL_PATH,
+        onset_threshold=0.5,
+        frame_threshold=0.3,
+        minimum_note_length=58,
+    )
+    return midi_data
+
+def transcribe_all(stems: dict[str, np.ndarray]) -> dict[str, pretty_midi.PrettyMIDI]:
+    pitched = {k: v for k, v in stems.items() if k != "drums"}
+    return {name: transcribe(audio) for name, audio in pitched.items()}</pre>
+  </section>
+
+  <hr class="spacer">
+
+  <!-- ══════════════════════════════════════════
+       OUTPUTS
+  ══════════════════════════════════════════ -->
+  <div class="layer-label">Layer 3 · Outputs</div>
+  <p style="color:var(--muted);margin-bottom:48px;max-width:600px;">Outputs are serialisation of the pipeline's results into open standard formats. No processing happens here — only writing well-typed data to files that downstream tools and clients can consume without custom parsers.</p>
+
+  <!-- Stems output -->
+  <section class="section" id="output-stems">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Output · Stems</div>
+        <h2>Stems</h2>
+      </div>
+      <span class="tag tag-pending">Pending</span>
+    </div>
+
+    <p>Each stem array from the Separate stage is written to disk as a FLAC file. FLAC is lossless and compressed — it preserves the full float32 precision of the Demucs output while being significantly smaller than raw WAV.</p>
+
+    <h3>Output files per job</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>File</th><th>Content</th><th>Typical size (4-min track)</th></tr></thead>
+        <tbody>
+          <tr><td>drums.flac</td><td>Isolated drum stem</td><td>~25–40 MB</td></tr>
+          <tr><td>bass.flac</td><td>Isolated bass stem</td><td>~20–35 MB</td></tr>
+          <tr><td>vocals.flac</td><td>Isolated vocal stem</td><td>~20–35 MB</td></tr>
+          <tr><td>other.flac</td><td>All remaining instruments</td><td>~25–45 MB</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-label">Serialisation</div>
+    <pre>import soundfile as sf
+from pathlib import Path
+
+def write_stems(stems: dict[str, np.ndarray], output_dir: Path, sr: int = 44100):
+    for name, audio in stems.items():
+        path = output_dir / f"{name}.flac"
+        # soundfile expects (samples, channels); our arrays are (channels, samples)
+        sf.write(str(path), audio.T, sr, subtype='PCM_24')</pre>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-STEM-1</div>
+      <p>Should stems be stored permanently or treated as ephemeral job artifacts with a TTL (e.g. 24 hours)? Storage cost for a high-volume service is non-trivial. Needs a product and infrastructure decision.</p>
+    </div>
+  </section>
+
+  <!-- MIDI output -->
+  <section class="section" id="output-midi">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Output · MIDI</div>
+        <h2>MIDI</h2>
+      </div>
+      <span class="tag tag-pending">Pending</span>
+    </div>
+
+    <p>Each <code>PrettyMIDI</code> object from the Transcribe stage is written to a standard <code>.mid</code> file. MIDI is a binary format encoding note events — pitch, velocity, onset time, offset time — and is readable by every DAW, notation tool, and music software.</p>
+
+    <h3>What's in a MIDI file</h3>
+    <p>A <code>.mid</code> file from this pipeline contains one instrument track per stem. Each note event encodes: MIDI note number (0–127, where 60 = middle C), start time in seconds, end time in seconds, and velocity (0–127, encoding how hard the note was played). Tempo and time signature are estimated by <code>pretty_midi</code> from the note density.</p>
+
+    <div class="code-label">Serialisation</div>
+    <pre>from pathlib import Path
+import pretty_midi
+
+def write_midi(midi_map: dict[str, pretty_midi.PrettyMIDI], output_dir: Path):
+    for name, midi in midi_map.items():
+        path = output_dir / f"{name}.mid"
+        midi.write(str(path))</pre>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-MIDI-1</div>
+      <p>Should the MIDI output assign General MIDI program numbers (instrument patches) to each stem? E.g. bass → program 33 (Electric Bass). This makes the MIDI file sound more realistic in a DAW but requires a mapping table and adds a layer of assumption.</p>
+    </div>
+  </section>
+
+  <!-- Score output -->
+  <section class="section" id="output-score">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Output · Score</div>
+        <h2>Score (MusicXML / PDF)</h2>
+      </div>
+      <span class="tag tag-pending">Pending — SDD-005</span>
+    </div>
+
+    <p>The score output converts <code>PrettyMIDI</code> note events into human-readable notation via <code>music21</code>. <code>music21</code> understands music theory — key signatures, time signatures, rhythmic quantisation, beaming — and outputs MusicXML, which is the open standard for notation interchange. MusicXML is then rendered to PDF by LilyPond or MuseScore CLI, both of which run headless.</p>
+
+    <div class="flow">
+      <div class="flow-box">PrettyMIDI</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">music21 parse</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Quantise + key detect</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">MusicXML</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">LilyPond / MuseScore</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">PDF</div>
+    </div>
+
+    <h3>The quantisation problem</h3>
+    <p>Basic Pitch produces note times in seconds with floating-point precision. A real score needs notes quantised to a rhythmic grid (quarter notes, eighth notes, etc.). <code>music21</code>'s quantisation is configurable but imperfect — expressive timing (rubato, swing) will be forced onto a strict grid, which may look odd for certain genres. This is a known limitation. See open question below.</p>
+
+    <div class="code-label">Implementation sketch</div>
+    <pre>from music21 import converter, stream, tempo
+import pretty_midi, tempfile
+from pathlib import Path
+
+def midi_to_score(midi: pretty_midi.PrettyMIDI, output_dir: Path, stem_name: str):
+    # Write temp .mid, read back via music21
+    tmp = tempfile.NamedTemporaryFile(suffix='.mid', delete=False)
+    midi.write(tmp.name)
+
+    score = converter.parse(tmp.name)
+    score = score.quantize(quarterLengthDivisors=(4, 3))  # 16th note grid + triplets
+
+    # MusicXML
+    xml_path = output_dir / f"{stem_name}.musicxml"
+    score.write('musicxml', fp=str(xml_path))
+
+    # PDF via MuseScore (must be in PATH)
+    pdf_path = output_dir / f"{stem_name}.pdf"
+    score.write('musicxml.pdf', fp=str(pdf_path))</pre>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-SCORE-1</div>
+      <p>Should score quantisation be strict (fixed grid, clean notation) or attempt to preserve expressive timing? Strict is better for classical/structured music; expressive preservation matters for jazz/blues. Needs a product decision — likely a configurable option. See ADR-004.</p>
+    </div>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-SCORE-2</div>
+      <p>LilyPond produces higher-quality engraving than MuseScore CLI but is less widely available as a system package. Do we ship LilyPond in our container image, use MuseScore, or support both?</p>
+    </div>
+  </section>
+
+  <hr class="spacer">
+
+  <!-- ══════════════════════════════════════════
+       CLIENTS & API
+  ══════════════════════════════════════════ -->
+  <div class="layer-label">Layer 4 · Clients &amp; API</div>
+  <p style="color:var(--muted);margin-bottom:48px;max-width:600px;">The API is the boundary between the pipeline and the outside world. All clients — web embeds, mobile SDKs, third-party integrations — speak to the same REST + WebSocket API. The API never re-processes; it only manages jobs and serves artifacts.</p>
+
+  <!-- REST + WebSocket API -->
+  <section class="section" id="client-api">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Client · API</div>
+        <h2>REST + WebSocket API</h2>
+      </div>
+      <span class="tag tag-pending">Pending — SDD-006</span>
+    </div>
+
+    <h3>REST endpoints</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Body / Params</th><th>Response</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td>/jobs</td><td>multipart: file OR json: { url }</td><td>{ job_id, status: "queued" }</td></tr>
+          <tr><td>GET</td><td>/jobs/:id</td><td>—</td><td>{ job_id, status, progress, created_at }</td></tr>
+          <tr><td>GET</td><td>/jobs/:id/outputs</td><td>—</td><td>{ stems: [...], midi: [...], score: [...] }</td></tr>
+          <tr><td>GET</td><td>/jobs/:id/outputs/:type/:stem</td><td>type = stems|midi|score</td><td>Binary file stream</td></tr>
+          <tr><td>DELETE</td><td>/jobs/:id</td><td>—</td><td>204 No Content</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Job status lifecycle</h3>
+    <div class="flow">
+      <div class="flow-box">queued</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">ingesting</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">separating</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">transcribing</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">complete</div>
+    </div>
+    <p style="margin-top:8px">Failed jobs transition to <code>failed</code> with an <code>error</code> field in the GET /jobs/:id response.</p>
+
+    <h3>WebSocket progress channel</h3>
+    <p>Clients may open a WebSocket connection to <code>wss://api/jobs/:id/progress</code>. The server emits JSON events as each pipeline stage completes:</p>
+    <div class="code-label">Event shape</div>
+    <pre>{ "stage": "separating", "progress": 0.6, "message": "Processing stem 3/4" }
+{ "stage": "complete",   "progress": 1.0, "outputs": { ... } }</pre>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-API-1</div>
+      <p>What is the authentication model? API key (simple, good for server-to-server), JWT (good for user-specific jobs), or OAuth (for user accounts with job history)? Needs a product decision before API implementation begins.</p>
+    </div>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-API-2</div>
+      <p>What is the rate limiting strategy? Per API key, per IP, or per user account? What are the limits for free vs paid tiers?</p>
+    </div>
+  </section>
+
+  <!-- Web embed -->
+  <section class="section" id="client-web">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Client · Web</div>
+        <h2>Web embed</h2>
+      </div>
+      <span class="tag tag-tbd">TBD</span>
+    </div>
+
+    <p>A JavaScript SDK that web applications embed to submit audio and receive results. Wraps the REST and WebSocket API. Handles file upload progress, job polling or WebSocket subscription, and result download.</p>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-WEB-1</div>
+      <p>Is the web embed a drop-in <code>&lt;script&gt;</code> tag with a UI widget, or a headless JS module that applications wire into their own UI? Both are valid — the former is faster to embed, the latter gives developers full control. Likely we need both: a headless <code>@music-pipeline/client</code> npm package and a pre-built widget on top of it.</p>
+    </div>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-WEB-2</div>
+      <p>For device capture (microphone → pipeline), does the web embed use <code>MediaRecorder API</code> to capture audio in the browser, then upload as a file? What codec does the browser output? (Typically Opus in a WebM container — the File adapter needs to handle this.)</p>
+    </div>
+  </section>
+
+  <!-- Mobile SDK -->
+  <section class="section" id="client-mobile">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Client · Mobile</div>
+        <h2>Mobile SDK</h2>
+      </div>
+      <span class="tag tag-tbd">TBD</span>
+    </div>
+
+    <p>Native SDKs for iOS (Swift) and Android (Kotlin) that wrap the REST + WebSocket API. The mobile SDK has the same responsibilities as the web embed — file submission, job tracking, result retrieval — with platform-appropriate patterns (async/await, Combine, Coroutines).</p>
+
+    <div class="callout callout-open">
+      <div class="callout-label">Open question · Q-MOB-1</div>
+      <p>Do we build native iOS and Android SDKs, a React Native module, or a Flutter plugin? Depends on whether the primary mobile consumer is a native app or a cross-platform one. Needs a product decision.</p>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-label">Note</div>
+      <p>All audio processing runs server-side. The mobile SDK does not run Demucs or Basic Pitch on-device. It is a thin API client. On-device processing is a potential future direction but is outside scope for v1.</p>
+    </div>
+  </section>
+
+  <hr class="spacer">
+
+  <!-- ══════════════════════════════════════════
+       ADR-001 summary
+  ══════════════════════════════════════════ -->
+  <section class="section" id="adr-001">
+    <div class="section-header">
+      <div>
+        <div class="section-id">ADR-001</div>
+        <h2>Technology stack decisions</h2>
+      </div>
+      <span class="tag tag-written">Written</span>
+    </div>
+
+    <p>Full document: <strong>ADR-001-music-pipeline-stack.md</strong>. Summary of key decisions:</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Concern</th><th>Decision</th><th>Key rationale</th></tr></thead>
+        <tbody>
+          <tr><td>Language</td><td>Python</td><td>ML research ecosystem publishes in Python; no equivalent for Demucs/Basic Pitch in any other language</td></tr>
+          <tr><td>Audio I/O</td><td>librosa</td><td>Decodes any format; returns NumPy array — universal internal representation</td></tr>
+          <tr><td>Source separation</td><td>Demucs htdemucs</td><td>Hybrid waveform+spectrogram architecture; best quality on MUSDB18 benchmark; no training required</td></tr>
+          <tr><td>Transcription</td><td>Basic Pitch</td><td>Handles polyphony (chords, simultaneous notes); classical methods (pYIN, CREPE) do not</td></tr>
+          <tr><td>MIDI representation</td><td>pretty_midi</td><td>Clean object model; native output of Basic Pitch; reads/writes standard .mid</td></tr>
+          <tr><td>Score generation</td><td>music21</td><td>Understands music theory; quantisation, key detection, MusicXML output</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       OPEN QUESTIONS REGISTRY
+  ══════════════════════════════════════════ -->
+  <section class="section" id="open-questions">
+    <div class="section-header">
+      <div>
+        <div class="section-id">Registry</div>
+        <h2>Open questions</h2>
+      </div>
+      <span class="tag tag-pending">Needs resolution</span>
+    </div>
+
+    <p>All unresolved decisions collected in one place. Each should be resolved before the relevant stage is implemented and documented in a follow-on ADR.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Question</th><th>Blocks</th><th>ADR</th></tr></thead>
+        <tbody>
+          <tr><td>Q-URL-1</td><td>Max file size / duration for URL inputs</td><td>URL adapter</td><td>—</td></tr>
+          <tr><td>Q-URL-2</td><td>Spotify URL support (DRM)</td><td>URL adapter</td><td>—</td></tr>
+          <tr><td>Q-STREAM-1</td><td>Batch vs rolling-window streaming architecture</td><td>Stream adapter, pipeline design</td><td>—</td></tr>
+          <tr><td>Q-STREAM-2</td><td>WebSocket audio codec (PCM vs Opus)</td><td>Stream adapter</td><td>—</td></tr>
+          <tr><td>Q-DEV-1</td><td>Server-side vs client-side device capture</td><td>Device adapter, web embed</td><td>—</td></tr>
+          <tr><td>Q-SEP-1</td><td>Model loading strategy (singleton vs per-job)</td><td>SDD-003</td><td>ADR-002</td></tr>
+          <tr><td>Q-SEP-2</td><td>Quality of "other" stem for multi-instrument songs</td><td>SDD-003</td><td>—</td></tr>
+          <tr><td>Q-TRX-1</td><td>Fixed vs per-stem vs per-job threshold tuning</td><td>SDD-004</td><td>—</td></tr>
+          <tr><td>Q-TRX-2</td><td>Drum transcription approach (ADTLib vs onset-only vs skip)</td><td>SDD-004</td><td>ADR-003</td></tr>
+          <tr><td>Q-STEM-1</td><td>Stem file retention policy / TTL</td><td>Infrastructure</td><td>—</td></tr>
+          <tr><td>Q-MIDI-1</td><td>Assign GM instrument programs to MIDI stems</td><td>SDD-004</td><td>—</td></tr>
+          <tr><td>Q-SCORE-1</td><td>Strict vs expressive score quantisation</td><td>SDD-005</td><td>ADR-004</td></tr>
+          <tr><td>Q-SCORE-2</td><td>LilyPond vs MuseScore CLI for PDF rendering</td><td>SDD-005</td><td>—</td></tr>
+          <tr><td>Q-API-1</td><td>Authentication model (API key / JWT / OAuth)</td><td>SDD-006</td><td>—</td></tr>
+          <tr><td>Q-API-2</td><td>Rate limiting strategy and tier structure</td><td>SDD-006</td><td>—</td></tr>
+          <tr><td>Q-WEB-1</td><td>Drop-in widget vs headless JS module</td><td>Web embed</td><td>—</td></tr>
+          <tr><td>Q-WEB-2</td><td>MediaRecorder codec output → File adapter compatibility</td><td>Web embed, File adapter</td><td>—</td></tr>
+          <tr><td>Q-MOB-1</td><td>Native vs React Native vs Flutter SDK</td><td>Mobile SDK</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid var(--border);padding:32px 0;margin-top:40px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <span>Music Analysis Pipeline · Engineering Bundle · SDD-001 v0.1-draft</span>
+    <span>2026-03-19 · Confidential — internal use only</span>
+  </footer>
+
+</main>
+
+<script>
+  const links = document.querySelectorAll('.sb-link');
+  const sections = document.querySelectorAll('section[id], div[id]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.sb-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
