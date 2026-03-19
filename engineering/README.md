@@ -15,8 +15,8 @@ Architecture Decision Records capture *why* we chose what we chose. Read these b
 | Document | Decision | Status |
 |----------|----------|--------|
 | [ADR-001](./decisions/ADR-001-stack.md) | Technology stack — Python, Demucs, Basic Pitch, music21 | ✅ Written |
-| ADR-002 | GPU provisioning strategy | 🔲 Pending |
-| ADR-003 | Drum stem transcription approach | 🔲 Pending |
+| [ADR-002](./decisions/ADR-002-inference-backend.md) | Inference backend — Modal, JobQueue abstraction, singleton model loading | ✅ Written |
+| [ADR-003](./decisions/ADR-003-drum-transcription.md) | Drum stem transcription — onset-only v1, DrumTranscriber ABC, ADTLib v2 | ✅ Written |
 | ADR-004 | Score quantisation — strict vs expressive | 🔲 Pending |
 | ADR-005 | Multi-channel downmix algorithm | 🔲 Pending |
 | [ADR-006](./decisions/ADR-006-client-integration.md) | Client integration strategy — API-first, thin clients, on-device rationale | ✅ Written |

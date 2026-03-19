@@ -23,8 +23,10 @@ import pytest
 
 try:
     import pretty_midi
+    HAS_PRETTY_MIDI = True
 except ModuleNotFoundError:
     pretty_midi = None  # type: ignore[assignment]
+    HAS_PRETTY_MIDI = False
 
 from src.pipeline.ingest import IngestError
 from src.pipeline.outputs import JobResult, OutputPaths

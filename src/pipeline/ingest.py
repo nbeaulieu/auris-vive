@@ -259,13 +259,13 @@ def _normalise(audio: np.ndarray, path: Path) -> np.ndarray:
     """
     Ensure dtype=float32 and values ∈ [-1.0, 1.0].
 
-    Non-finite values (NaN, ±inf) are detected and raised as IngestError
-    before clipping — np.clip(±inf) = ±1.0 would otherwise silently mask
-    corrupt source data.
-
-    Pre-clipped audio (finite peak > 1.0) is detected and logged before
+    Pre-clipped audio (source peak > 1.0) is detected and logged before
     clipping.  We do not attempt repair — brick-wall limiting is a mastering
-    concern.
+    concern.  We enforce the contract boundary and let the caller decide
+    whether to reject the job.
+
+    Levels near (but not exceeding) ±1.0 are logged at DEBUG so engineers
+    can distinguish intentional full-scale masters from accidental overdrive.
     """
     audio = audio.astype(np.float32)
 
@@ -290,7 +290,6 @@ def _normalise(audio: np.ndarray, path: Path) -> np.ndarray:
         )
 
     return np.clip(audio, -1.0, 1.0)
-
 
 # ── Step 6: post-load validation ──────────────────────────────────────────────
 

@@ -15,6 +15,11 @@ dependencies = [
     "numpy>=1.26",
     "resampy>=0.4",
 
+    # PyTorch — needed for separate stage device selection and tensor ops.
+    # torch supports Python 3.13; kept in base deps so test_separate.py
+    # runs in both .venv and .venv-ml without the full ML stack.
+    "torch>=2.0",
+
     # API
     "fastapi>=0.110",
     "uvicorn[standard]>=0.29",
@@ -59,6 +64,9 @@ filterwarnings = [
     # attributes to our call site in ingest.py rather than to librosa.
     # Scoping by message text instead of module path.
     "ignore:PySoundFile failed:UserWarning",
+    # resampy uses pkg_resources internally which is deprecated in newer
+    # setuptools. Third-party issue, tracked upstream.
+    "ignore:pkg_resources is deprecated:UserWarning",
 ]
 
 [tool.ruff]

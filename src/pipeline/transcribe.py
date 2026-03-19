@@ -32,7 +32,6 @@ import numpy as np
 if TYPE_CHECKING:
     import pretty_midi
 
-
 class TranscribeError(Exception):
     """Domain exception for the transcribe stage."""
 
