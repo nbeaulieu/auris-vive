@@ -107,12 +107,12 @@ Clients         Web embed JS SDK / Mobile SDK
 | SDD-001 — Pipeline overview | 🔄 In progress | `engineering/design/SDD-001-pipeline-overview.html` |
 | SDD-002 — Ingest stage | ✅ Written | `engineering/design/SDD-002-ingest-stage.md` |
 | SDD-003 — Separate (Demucs) | 🔲 Pending | — |
-| SDD-004 — Transcribe (Basic Pitch) | 🔲 Pending | — |
-| SDD-005 — Score (music21) | 🔲 Pending | — |
+| SDD-004 — Transcribe (Basic Pitch) | ✅ Written | `engineering/design/SDD-004-transcribe-stage.md` |
+| SDD-005 — Outputs (FLAC + MIDI) | ✅ Written | `engineering/design/SDD-005-outputs-stage.md` |
 | SDD-006 — API + job queue | 🔲 Pending | — |
 | SDD-007 — Input adapters | 🔲 Pending | — |
-| ADR-002 — GPU provisioning | 🔲 Pending | — |
-| ADR-003 — Drum stem handling | 🔲 Pending | — |
+| ADR-002 — Inference backend | ✅ Written | `engineering/decisions/ADR-002-inference-backend.md` |
+| ADR-003 — Drum stem handling | ✅ Written | `engineering/decisions/ADR-003-drum-transcription.md` |
 | ADR-004 — Score quantisation | 🔲 Pending | — |
 | ADR-005 — Multi-channel downmix | 🔲 Pending | — |
 

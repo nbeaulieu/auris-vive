@@ -30,8 +30,8 @@ One document per pipeline stage. Each SDD covers: what the stage does, why it's 
 | [SDD-001](./design/SDD-001-pipeline-overview.html) | Full pipeline overview — open in browser | 🔄 In progress |
 | [SDD-002](./design/SDD-002-ingest-stage.md) | Ingest — decode, resample, normalise | ✅ Written |
 | SDD-003 | Separate — Demucs source separation | 🔲 Pending |
-| SDD-004 | Transcribe — Basic Pitch MIDI extraction | 🔲 Pending |
-| SDD-005 | Score — music21 → MusicXML → PDF | 🔲 Pending |
+| [SDD-004](./design/SDD-004-transcribe-stage.md) | Transcribe — Basic Pitch MIDI extraction | ✅ Written |
+| [SDD-005](./design/SDD-005-outputs-stage.md) | Outputs — FLAC stems, MIDI files, score stub | ✅ Written |
 | SDD-006 | API and job queue | 🔲 Pending |
 | SDD-007 | Input adapters (file, URL, stream, device) | 🔲 Pending |
 
@@ -81,23 +81,20 @@ Full rationale in [ADR-001](./decisions/ADR-001-stack.md).
 | ID | Question | Blocks |
 |----|----------|--------|
 | Q-STREAM-1 | Batch vs rolling-window streaming architecture | Stream adapter, pipeline design |
-| Q-TRX-2 | Drum transcription — ADTLib vs onset-only vs skip | SDD-004, ADR-003 |
-| Q-SEP-1 | Model loading — singleton vs per-job | SDD-003, ADR-002 |
+| ~~Q-TRX-2~~ | ~~Drum transcription~~ — **resolved** by ADR-003 (onset-only for v1) | ✅ Closed |
+| ~~Q-SEP-1~~ | ~~Model loading~~ — **resolved** by ADR-002 (singleton at worker startup) | ✅ Closed |
 | Q-API-1 | Authentication model | SDD-006 |
 
 ---
 
 ## Development setup
 
-*(Stub — to be filled when implementation begins)*
-
 ```bash
-# Python 3.11+
-pip install librosa demucs basic-pitch pretty_midi music21
-
+python3.11 -m venv .venv-ml
+source .venv-ml/bin/activate
+pip install -e ".[dev,ml]"
 # FFmpeg required for MP3/MP4 decoding
-brew install ffmpeg        # macOS
-apt install ffmpeg         # Ubuntu/Debian
+brew install ffmpeg
 ```
 
 ---

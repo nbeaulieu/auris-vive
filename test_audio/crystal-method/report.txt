@@ -1,0 +1,15 @@
+Auris Vive — Stem Analysis Report
+Generated: 2026-03-19 12:43:34
+Source:    /Users/nicole/dev/auris-vive/test_audio/crystal-method/clip.wav
+Duration:  30.04s
+Device:    mps
+Time:      31.9s
+
+stem            peak       rms   isolation  note
+--------------------------------------------------------------
+bass          0.4865    0.0652      0.5403  strong
+drums         0.5953    0.0573      0.4748  strong
+guitar        0.1968    0.0284      0.2352  present
+other         0.2817    0.0464      0.3845  strong
+piano         0.0010    0.0001      0.0007  silent
+vocals        0.3030    0.0365      0.3024  strong

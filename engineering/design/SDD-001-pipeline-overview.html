@@ -306,13 +306,13 @@
     <div class="sb-label">Core pipeline</div>
     <a href="#stage-ingest" class="sb-link"><span class="dot dot-written"></span>Ingest</a>
     <a href="#stage-separate" class="sb-link"><span class="dot dot-pending"></span>Separate</a>
-    <a href="#stage-transcribe" class="sb-link"><span class="dot dot-pending"></span>Transcribe</a>
+    <a href="#stage-transcribe" class="sb-link"><span class="dot dot-written"></span>Transcribe</a>
   </div>
 
   <div class="sb-section">
     <div class="sb-label">Outputs</div>
-    <a href="#output-stems" class="sb-link"><span class="dot dot-pending"></span>Stems</a>
-    <a href="#output-midi" class="sb-link"><span class="dot dot-pending"></span>MIDI</a>
+    <a href="#output-stems" class="sb-link"><span class="dot dot-written"></span>Stems</a>
+    <a href="#output-midi" class="sb-link"><span class="dot dot-written"></span>MIDI</a>
     <a href="#output-score" class="sb-link"><span class="dot dot-pending"></span>Score</a>
   </div>
 
@@ -377,12 +377,12 @@
       <div class="doc-card">
         <div class="doc-id">SDD-004</div>
         <div class="doc-title">Transcribe stage (Basic Pitch)</div>
-        <div class="doc-status"><span class="tag tag-pending">Pending</span></div>
+        <div class="doc-status"><span class="tag tag-written">Written</span></div>
       </div>
       <div class="doc-card">
         <div class="doc-id">SDD-005</div>
-        <div class="doc-title">Score generation (music21)</div>
-        <div class="doc-status"><span class="tag tag-pending">Pending</span></div>
+        <div class="doc-title">Outputs stage (FLAC + MIDI + score stub)</div>
+        <div class="doc-status"><span class="tag tag-written">Written</span></div>
       </div>
     </div>
   </section>
@@ -823,7 +823,7 @@ def separate(audio: np.ndarray, device: str = "cuda") -> dict[str, np.ndarray]:
         <div class="section-id">Stage 3 · Transcribe</div>
         <h2>Transcribe (Basic Pitch)</h2>
       </div>
-      <span class="tag tag-pending">Pending — SDD-004</span>
+      <span class="tag tag-written">Implemented — SDD-004</span>
     </div>
 
     <div class="flow">
@@ -1191,10 +1191,10 @@ def midi_to_score(midi: pretty_midi.PrettyMIDI, output_dir: Path, stem_name: str
           <tr><td>Q-STREAM-1</td><td>Batch vs rolling-window streaming architecture</td><td>Stream adapter, pipeline design</td><td>—</td></tr>
           <tr><td>Q-STREAM-2</td><td>WebSocket audio codec (PCM vs Opus)</td><td>Stream adapter</td><td>—</td></tr>
           <tr><td>Q-DEV-1</td><td>Server-side vs client-side device capture</td><td>Device adapter, web embed</td><td>—</td></tr>
-          <tr><td>Q-SEP-1</td><td>Model loading strategy (singleton vs per-job)</td><td>SDD-003</td><td>ADR-002</td></tr>
+          <tr style="opacity:0.5;text-decoration:line-through"><td>Q-SEP-1</td><td>Model loading strategy — resolved by ADR-002 (singleton at worker startup)</td><td>SDD-003</td><td>ADR-002 ✅</td></tr>
           <tr><td>Q-SEP-2</td><td>Quality of "other" stem for multi-instrument songs</td><td>SDD-003</td><td>—</td></tr>
           <tr><td>Q-TRX-1</td><td>Fixed vs per-stem vs per-job threshold tuning</td><td>SDD-004</td><td>—</td></tr>
-          <tr><td>Q-TRX-2</td><td>Drum transcription approach (ADTLib vs onset-only vs skip)</td><td>SDD-004</td><td>ADR-003</td></tr>
+          <tr style="opacity:0.5;text-decoration:line-through"><td>Q-TRX-2</td><td>Drum transcription — resolved by ADR-003 (onset-only for v1, DrumTranscriber ABC for v2)</td><td>SDD-004</td><td>ADR-003 ✅</td></tr>
           <tr><td>Q-STEM-1</td><td>Stem file retention policy / TTL</td><td>Infrastructure</td><td>—</td></tr>
           <tr><td>Q-MIDI-1</td><td>Assign GM instrument programs to MIDI stems</td><td>SDD-004</td><td>—</td></tr>
           <tr><td>Q-SCORE-1</td><td>Strict vs expressive score quantisation</td><td>SDD-005</td><td>ADR-004</td></tr>
