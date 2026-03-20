@@ -1,0 +1,17 @@
+Auris Vive — Stem Analysis Report
+Generated: 2026-03-19 17:29:24
+Track:     finger-eleven
+Source:    /Users/nicole/dev/auris-vive/test_audio/finger-eleven/clip.wav
+Duration:  30.00s
+BPM:       105.5
+Device:    mps
+Time:      85.5s
+
+stem            peak       rms   isolation  note
+--------------------------------------------------------------
+bass          0.5691    0.1155      0.3368  strong
+drums         1.1172    0.1570      0.4578  strong
+guitar        0.9584    0.1464      0.4270  strong
+other         0.9195    0.1520      0.4432  strong
+piano         0.0073    0.0003      0.0007  silent
+vocals        0.9742    0.1830      0.5337  strong

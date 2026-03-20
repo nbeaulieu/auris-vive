@@ -47,34 +47,24 @@ console = Console()
 #   duration    : clip length in seconds
 #   notes       : anything interesting about this track for testing
 
-SONGS = [
-    {
-        "name":     "Fate of Ophelia — Taylor Swift",
-        "slug":     "tswift",
-        "url":      "https://www.youtube.com/watch?v=ko70cExuzZM",
-        "start":    "2:10",
-        "duration": 30,
-        "notes":    "Strings + vocals. Piano stem near-silent (correct). Vocals excellent.",
-    },
-    {
-        "name":     "Piano Man — Billy Joel",
-        "slug":     "piano-man",
-        "url":      "https://www.youtube.com/watch?v=gxEPV4kolz0",
-        "start":    "1:25",
-        "duration": 30,
-        "notes":    "Dense live mix. Piano stem noisy (harmonica bleed). Vocals stellar.",
-    },
-    {
-        "name":     "Earth Flyover — Crystal Method",
-        "slug":     "earth-flyover",
-        "url":      "https://www.youtube.com/watch?v=bBG743nNry4",
-        "start":    "3:00",
-        "duration": 30,
-        "notes":    "Electronic. Testing how Demucs handles synth-heavy material.",
-    },
-]
+REPO_ROOT  = Path(__file__).parent.parent
+SONGS_FILE = REPO_ROOT / "test_audio" / "songs.json"
 
-REPO_ROOT = Path(__file__).parent.parent
+
+def load_songs() -> list[dict]:
+    if not SONGS_FILE.exists():
+        return []
+    with open(SONGS_FILE) as f:
+        import json
+        return json.load(f)
+
+
+def save_songs(songs: list[dict]) -> None:
+    import json
+    SONGS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(SONGS_FILE, "w") as f:
+        json.dump(songs, f, indent=2)
+    console.print(f"  [dim]saved to {SONGS_FILE}[/dim]")
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -139,19 +129,22 @@ def grab_clip(song: dict):
         console.print("[#A084C8]✓ clip saved[/#A084C8]")
 
 
-def run_stems(song: dict):
+def run_stems(song: dict, force: bool = False):
     clip_path = REPO_ROOT / "test_audio" / song["slug"] / "clip.wav"
     if not clip_path.exists():
         console.print("[red]✗ no clip found — grab it first[/red]")
         return
 
     console.print(f"\n[#C9A96E]▸[/#C9A96E] running stems: [bold]{song['name']}[/bold]")
+    cmd = [
+        str(REPO_ROOT / "scripts" / "run-stems.sh"),
+        str(clip_path),
+        song["slug"],
+    ]
+    if force:
+        cmd.append("--force")
     rc = run_command(
-        [
-            str(REPO_ROOT / "scripts" / "run-stems.sh"),
-            str(clip_path),
-            song["slug"],
-        ],
+        cmd,
         env={"AURIS_DEVICE": os.environ.get("AURIS_DEVICE", "auto")},
     )
     if rc != 0:
@@ -181,7 +174,7 @@ def add_song_interactive() -> dict | None:
 # ── Main menu ─────────────────────────────────────────────────────────────────
 
 def main():
-    songs = list(SONGS)  # mutable copy for this session
+    songs = load_songs()
 
     while True:
         header()
@@ -190,7 +183,9 @@ def main():
         console.print("  [#C9A96E]g[/#C9A96E]  grab clip      "
                       "[#C9A96E]s[/#C9A96E]  run stems      "
                       "[#C9A96E]b[/#C9A96E]  grab + stems")
-        console.print("  [#C9A96E]a[/#C9A96E]  add song       "
+        console.print("  [#C9A96E]f[/#C9A96E]  force re-stem  "
+                      "[#C9A96E]a[/#C9A96E]  add song       "
+                      "[#C9A96E]r[/#C9A96E]  run all        "
                       "[#C9A96E]q[/#C9A96E]  quit")
         console.print()
 
@@ -204,9 +199,18 @@ def main():
             new_song = add_song_interactive()
             if new_song:
                 songs.append(new_song)
-                console.print("[#A084C8]✓ added — grab the clip to get started[/#A084C8]")
+                save_songs(songs)
+                console.print("[#A084C8]✓ added and saved — grab the clip to get started[/#A084C8]")
 
-        elif action in ("g", "s", "b"):
+        elif action == "r":
+            console.print(f"\n[#C9A96E]▸[/#C9A96E] running all {len(songs)} songs through full pipeline\n")
+            for i, song in enumerate(songs, 1):
+                console.rule(f"[#7B5EA7]{i}/{len(songs)} — {song['name']}[/#7B5EA7]")
+                grab_clip(song)
+                run_stems(song)
+            console.rule("[#A084C8]all done[/#A084C8]")
+
+        elif action in ("g", "s", "b", "f"):
             console.print()
             console.print(song_table(songs))
             idx = Prompt.ask("  song number").strip()
@@ -220,6 +224,8 @@ def main():
                 grab_clip(song)
             if action in ("s", "b"):
                 run_stems(song)
+            if action == "f":
+                run_stems(song, force=True)
 
         else:
             console.print("[dim]unknown action[/dim]")

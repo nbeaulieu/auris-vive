@@ -1,0 +1,17 @@
+Auris Vive — Stem Analysis Report
+Generated: 2026-03-19 17:32:50
+Track:     kendrick
+Source:    /Users/nicole/dev/auris-vive/test_audio/kendrick/clip.wav
+Duration:  30.00s
+BPM:       101.3
+Device:    mps
+Time:      93.7s
+
+stem            peak       rms   isolation  note
+--------------------------------------------------------------
+bass          0.7018    0.3036      0.9164  strong
+drums         0.7709    0.0385      0.1163  present
+guitar        0.4000    0.0393      0.1187  present
+other         0.5679    0.0621      0.1874  present
+piano         0.0043    0.0001      0.0004  silent
+vocals        1.1004    0.1031      0.3112  strong

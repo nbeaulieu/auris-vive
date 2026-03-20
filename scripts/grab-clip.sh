@@ -24,6 +24,9 @@ OUTFILE="$OUTDIR/clip.wav"
 
 mkdir -p "$OUTDIR"
 
+# Remove stale clip so a failed download never leaves old data in place
+rm -f "$OUTFILE"
+
 echo "▸ downloading: $NAME"
 yt-dlp \
   --extract-audio \
@@ -32,14 +35,21 @@ yt-dlp \
   --output "$OUTDIR/full.%(ext)s" \
   "$URL"
 
+# yt-dlp may download webm/opus before converting — find whatever landed
+FULL=$(ls "$OUTDIR"/full.* 2>/dev/null | head -1)
+if [ -z "$FULL" ]; then
+  echo "✗ download failed — no audio file found"
+  exit 1
+fi
+
 echo "▸ trimming to ${DURATION}s from ${START}..."
 ffmpeg -y \
   -ss "$START" \
-  -i "$OUTDIR/full.wav" \
+  -i "$FULL" \
   -t "$DURATION" \
-  -c copy \
+  -ar 44100 \
   "$OUTFILE"
 
-rm "$OUTDIR/full.wav"
+rm -f "$FULL"
 
 echo "✓ saved: $OUTFILE"

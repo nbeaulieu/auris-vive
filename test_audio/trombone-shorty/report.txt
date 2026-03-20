@@ -1,0 +1,17 @@
+Auris Vive — Stem Analysis Report
+Generated: 2026-03-19 17:24:22
+Track:     trombone-shorty
+Source:    /Users/nicole/dev/auris-vive/test_audio/trombone-shorty/clip.wav
+Duration:  30.00s
+BPM:       114.8
+Device:    mps
+Time:      29.7s
+
+stem            peak       rms   isolation  note
+--------------------------------------------------------------
+bass          0.6990    0.1145      0.5893  strong
+drums         1.2575    0.1014      0.5220  strong
+guitar        0.5644    0.0301      0.1551  present
+other         1.1332    0.1006      0.5182  strong
+piano         0.0232    0.0003      0.0013  weak
+vocals        0.3504    0.0118      0.0610  present

@@ -1,0 +1,17 @@
+Auris Vive — Stem Analysis Report
+Generated: 2026-03-19 17:27:51
+Track:     love-and-rockets
+Source:    /Users/nicole/dev/auris-vive/test_audio/love-and-rockets/clip.wav
+Duration:  30.00s
+BPM:       120.2
+Device:    mps
+Time:      81.6s
+
+stem            peak       rms   isolation  note
+--------------------------------------------------------------
+bass          0.1862    0.0676      0.5426  strong
+drums         0.5962    0.0559      0.4481  strong
+guitar        0.1667    0.0191      0.1530  present
+other         0.2140    0.0386      0.3098  strong
+piano         0.0013    0.0001      0.0009  silent
+vocals        0.5642    0.0593      0.4760  strong
