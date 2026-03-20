@@ -95,8 +95,13 @@ Icon
 *.key
 secrets/
 
-# ── Proto data (generated — do not commit audio or curve JSON) ────────────────
-docs/proto/data/
+# ── Proto data (built assets needed for GitHub Pages) ────────────────────────
+# Allow curves and audio for deployment; ignore everything else
+docs/proto/data/**/stems/
+!docs/proto/public/data/
+!docs/proto/public/data/**/
+!docs/proto/public/data/**/*.json
+!docs/proto/public/data/**/*.mp3
 docs/proto/node_modules/
 docs/proto/dist/
 
