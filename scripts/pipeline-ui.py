@@ -88,13 +88,16 @@ def song_table(songs: list[dict]) -> Table:
     table.add_column("dur",    style="#A084C8", width=5)
     table.add_column("clip",   style="dim", width=6)
     table.add_column("stems",  style="dim", width=6)
+    table.add_column("curves", style="dim", width=7)
     table.add_column("notes",  style="italic #8a8a8a")
 
     for i, song in enumerate(songs, 1):
-        clip_path  = REPO_ROOT / "test_audio" / song["slug"] / "clip.wav"
-        stems_path = REPO_ROOT / "test_audio" / song["slug"] / "stems"
-        has_clip   = "✓" if clip_path.exists()  else "·"
-        has_stems  = "✓" if stems_path.exists() else "·"
+        clip_path   = REPO_ROOT / "test_audio" / song["slug"] / "clip.wav"
+        stems_path  = REPO_ROOT / "test_audio" / song["slug"] / "stems"
+        curves_path = REPO_ROOT / "test_audio" / song["slug"] / "curves"
+        has_clip    = "✓" if clip_path.exists()   else "·"
+        has_stems   = "✓" if stems_path.exists()  else "·"
+        has_curves  = "✓" if curves_path.exists() else "·"
         table.add_row(
             str(i),
             song["name"],
@@ -102,6 +105,7 @@ def song_table(songs: list[dict]) -> Table:
             str(song["duration"]) + "s",
             has_clip,
             has_stems,
+            has_curves,
             song["notes"],
         )
 
@@ -148,12 +152,47 @@ def run_stems(song: dict, force: bool = False):
         env={"AURIS_DEVICE": os.environ.get("AURIS_DEVICE", "auto")},
     )
     if rc != 0:
-        console.print("[red]✗ separation failed[/red]")
+        console.print("[dim]↷ skipped (stems exist — use f to force)[/dim]")
     else:
         console.print("[#A084C8]✓ stems written[/#A084C8]")
 
 
-def add_song_interactive() -> dict | None:
+def run_analyse(song: dict):
+    stems_dir = REPO_ROOT / "test_audio" / song["slug"] / "stems"
+    if not any(stems_dir.glob("*.npy")) if stems_dir.exists() else True:
+        console.print("[red]✗ no stem .npy files — run stems first[/red]")
+        return
+
+    console.print(f"\n[#C9A96E]▸[/#C9A96E] analysing: [bold]{song['name']}[/bold]")
+    rc = run_command([
+        str(REPO_ROOT / "scripts" / "run-analyse.sh"),
+        song["slug"],
+    ])
+    if rc != 0:
+        console.print("[red]✗ analysis failed[/red]")
+    else:
+        console.print("[#A084C8]✓ curves written[/#A084C8]")
+
+
+
+    curves_dir = REPO_ROOT / "test_audio" / song["slug"] / "curves"
+    if not curves_dir.exists():
+        console.print("[red]✗ no curves found — run stems first[/red]")
+        return
+
+    console.print(f"\n[#C9A96E]▸[/#C9A96E] exporting curves: [bold]{song['name']}[/bold]")
+    rc = run_command([
+        str(REPO_ROOT / ".venv-ml" / "bin" / "python3"),
+        str(REPO_ROOT / "scripts" / "export-curves.py"),
+        "--slug", song["slug"],
+    ])
+    if rc != 0:
+        console.print("[red]✗ export failed[/red]")
+    else:
+        console.print("[#A084C8]✓ curves exported to docs/proto/data/[/#A084C8]")
+
+
+
     console.print("\n[#C9A96E]▸[/#C9A96E] add a new song\n")
     name     = Prompt.ask("  display name")
     slug     = Prompt.ask("  slug (directory name, no spaces)")
@@ -184,7 +223,9 @@ def main():
                       "[#C9A96E]s[/#C9A96E]  run stems      "
                       "[#C9A96E]b[/#C9A96E]  grab + stems")
         console.print("  [#C9A96E]f[/#C9A96E]  force re-stem  "
-                      "[#C9A96E]a[/#C9A96E]  add song       "
+                      "[#C9A96E]n[/#C9A96E]  analyse        "
+                      "[#C9A96E]c[/#C9A96E]  export curves")
+        console.print("  [#C9A96E]a[/#C9A96E]  add song       "
                       "[#C9A96E]r[/#C9A96E]  run all        "
                       "[#C9A96E]q[/#C9A96E]  quit")
         console.print()
@@ -208,9 +249,11 @@ def main():
                 console.rule(f"[#7B5EA7]{i}/{len(songs)} — {song['name']}[/#7B5EA7]")
                 grab_clip(song)
                 run_stems(song)
+                run_analyse(song)
+                export_curves(song)
             console.rule("[#A084C8]all done[/#A084C8]")
 
-        elif action in ("g", "s", "b", "f"):
+        elif action in ("g", "s", "b", "f", "n", "c"):
             console.print()
             console.print(song_table(songs))
             idx = Prompt.ask("  song number").strip()
@@ -226,6 +269,10 @@ def main():
                 run_stems(song)
             if action == "f":
                 run_stems(song, force=True)
+            if action == "n":
+                run_analyse(song)
+            if action == "c":
+                export_curves(song)
 
         else:
             console.print("[dim]unknown action[/dim]")

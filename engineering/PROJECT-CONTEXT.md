@@ -115,6 +115,8 @@ Clients         Web embed JS SDK / Mobile SDK
 | ADR-003 — Drum stem handling | ✅ Written | `engineering/decisions/ADR-003-drum-transcription.md` |
 | ADR-004 — Score quantisation | 🔲 Pending | — |
 | ADR-005 — Multi-channel downmix | 🔲 Pending | — |
+| SDD-008 — Analyse (curve extraction) | ✅ Written | `engineering/design/SDD-008-analyse-stage.md` |
+| SDD-009 — Visual prototype (web) | ✅ Written | `engineering/design/SDD-009-visual-prototype.md` |
 
 ---
 

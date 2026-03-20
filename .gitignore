@@ -95,5 +95,13 @@ Icon
 *.key
 secrets/
 
+# ── Proto data (generated — do not commit audio or curve JSON) ────────────────
+docs/proto/data/
+docs/proto/node_modules/
+docs/proto/dist/
+
 # ── Logs ──────────────────────.DS_Store
 **/.DS_Store
+test_audio.zip
+test_audio.zip
+*.zip

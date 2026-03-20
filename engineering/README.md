@@ -34,6 +34,8 @@ One document per pipeline stage. Each SDD covers: what the stage does, why it's 
 | [SDD-005](./design/SDD-005-outputs-stage.md) | Outputs — FLAC stems, MIDI files, score stub | ✅ Written |
 | SDD-006 | API and job queue | 🔲 Pending |
 | SDD-007 | Input adapters (file, URL, stream, device) | 🔲 Pending |
+| [SDD-008](./design/SDD-008-analyse-stage.md) | Analyse — per-stem curve extraction | ✅ Written |
+| [SDD-009](./design/SDD-009-visual-prototype.md) | Visual prototype — web audio + wave renderer | ✅ Written |
 
 ---
 

@@ -140,4 +140,19 @@ print(f"  stems:  test_audio/{name}/stems/")
 for f in sorted(out_dir.glob("*.flac")):
     size_kb = f.stat().st_size // 1024
     print(f"    {f.name:20s}  {size_kb:>6d} KB")
+
+# ── Curve extraction ─────────────────────────────────────────────────────────
+
+from src.pipeline.analyse.analyse import analyse as analyse_curves
+from src.pipeline.analyse.disk import DiskCurvesSource
+
+curves_dir = Path(f"test_audio/{name}/curves")
+source = DiskCurvesSource(curves_dir)
+
+print(f"\n▸ extracting visualisation curves...")
+stem_curves = analyse_curves(all_stems)
+for sc_name, sc in stem_curves.items():
+    source.save(sc_name, sc)
+    print(f"  ✓ curves: {sc_name}")
+print(f"  curves: {curves_dir}/")
 EOF

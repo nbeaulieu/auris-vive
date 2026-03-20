@@ -192,6 +192,7 @@ Do not skip these updates. Stale documentation is a bug.
 | `src/pipeline/outputs.py` | ✅ Complete | 7 tests passing |
 | `src/pipeline/analyse/` | ✅ Complete | 12 tests passing |
 | `src/pipeline/runner.py` | ✅ Complete | wires all stages |
+| `docs/proto/` | ✅ Complete | TypeScript Vite app, deploys to GitHub Pages |
 | `src/api/` | 🔲 Stub | blocked on Q-API-1, do not touch |
 | `tests/pipeline/test_transcribe.py` | ✅ Complete | TC-TRX-001 through TC-TRX-009 |
 | `tests/pipeline/test_outputs.py` | ✅ Complete | TC-OUT-001 through TC-OUT-007 |

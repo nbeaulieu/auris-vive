@@ -14,6 +14,7 @@ dependencies = [
     "soundfile>=0.12",
     "numpy>=1.26",
     "resampy>=0.4",
+    "scipy>=1.10",
 
     # PyTorch — needed for separate stage device selection and tensor ops.
     # torch supports Python 3.13; kept in base deps so test_separate.py
