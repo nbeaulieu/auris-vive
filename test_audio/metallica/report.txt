@@ -1,17 +1,17 @@
 Auris Vive — Stem Analysis Report
-Generated: 2026-03-19 17:31:09
+Generated: 2026-03-19 22:54:25
 Track:     metallica
 Source:    /Users/nicole/dev/auris-vive/test_audio/metallica/clip.wav
 Duration:  30.00s
 BPM:       126.0
 Device:    mps
-Time:      98.6s
+Time:      29.8s
 
 stem            peak       rms   isolation  note
 --------------------------------------------------------------
-bass          0.4551    0.1356      0.4793  strong
-drums         1.2856    0.1168      0.4128  strong
-guitar        0.6313    0.1260      0.4451  strong
-other         0.6477    0.1325      0.4682  strong
-piano         0.0038    0.0002      0.0007  silent
-vocals        1.1937    0.1198      0.4233  strong
+bass          0.4665    0.1347      0.4761  strong
+drums         1.2837    0.1166      0.4119  strong
+guitar        0.6461    0.1265      0.4470  strong
+other         0.6577    0.1336      0.4721  strong
+piano         0.0033    0.0002      0.0007  silent
+vocals        1.2103    0.1196      0.4226  strong

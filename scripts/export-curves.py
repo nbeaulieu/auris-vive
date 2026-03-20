@@ -20,14 +20,14 @@ import numpy as np
 # Repo root = parent of scripts/
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TEST_AUDIO = REPO_ROOT / "test_audio"
-PROTO_DATA = REPO_ROOT / "docs" / "proto" / "data"
+PROTO_DATA = REPO_ROOT / "docs" / "proto" / "public" / "data"
 
 STEM_NAMES = ("drums", "bass", "vocals", "other", "piano", "guitar")
-CURVE_NAMES = ("energy", "brightness", "onset", "warmth", "texture", "flux")
+CURVE_NAMES = ("energy", "brightness", "onset", "warmth", "texture", "flux", "pitch_curve")
 
 
 def load_stem_curves(curves_dir: Path, stem_name: str) -> dict[str, list[float]] | None:
-    """Load all six .npy curves for a stem, returning rounded float lists."""
+    """Load all .npy curves for a stem, returning rounded float lists."""
     meta_path = curves_dir / f"{stem_name}_meta.json"
     if not meta_path.exists():
         return None

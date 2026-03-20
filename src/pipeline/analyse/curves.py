@@ -1,7 +1,7 @@
 """
 StemCurves dataclass and AnalyseError — analyse stage data types.
 
-Each StemCurves holds six normalised time-series curves extracted from a single
+Each StemCurves holds seven normalised time-series curves extracted from a single
 separated stem.  All curves are float32, shape (T,), values in [0.0, 1.0].
 The visual layer drives animations directly from these arrays.
 """
@@ -24,24 +24,26 @@ CURVE_NAMES: tuple[str, ...] = (
     "warmth",
     "texture",
     "flux",
+    "pitch_curve",
 )
 
 
 @dataclass
 class StemCurves:
     """
-    Six normalised visualisation curves for a single stem.
+    Seven normalised visualisation curves for a single stem.
 
     Attributes
     ----------
-    energy     : RMS power envelope
-    brightness : spectral centroid (normalised to [0, 1])
-    onset      : onset strength
-    warmth     : low-frequency energy ratio (< 300 Hz)
-    texture    : spectral flatness (0 = tonal, 1 = noisy)
-    flux       : spectral flux (frame-to-frame change)
-    fps        : frames per second these were computed at
-    sr         : sample rate of the source audio
+    energy      : RMS power envelope
+    brightness  : spectral centroid (normalised to [0, 1])
+    onset       : onset strength
+    warmth      : low-frequency energy ratio (< 300 Hz)
+    texture     : spectral flatness (0 = tonal, 1 = noisy)
+    flux        : spectral flux (frame-to-frame change)
+    pitch_curve : fundamental frequency (0 = unvoiced, >0 = pitched)
+    fps         : frames per second these were computed at
+    sr          : sample rate of the source audio
     """
 
     energy: np.ndarray
@@ -50,6 +52,7 @@ class StemCurves:
     warmth: np.ndarray
     texture: np.ndarray
     flux: np.ndarray
+    pitch_curve: np.ndarray
     fps: int
     sr: int
 
@@ -78,12 +81,13 @@ class StemCurves:
             warmth=self.warmth[::stride],
             texture=self.texture[::stride],
             flux=self.flux[::stride],
+            pitch_curve=self.pitch_curve[::stride],
             fps=target_fps,
             sr=self.sr,
         )
 
     def curve_dict(self) -> dict[str, np.ndarray]:
-        """Return all six curves as a name → array dict."""
+        """Return all seven curves as a name → array dict."""
         return {
             "energy": self.energy,
             "brightness": self.brightness,
@@ -91,4 +95,5 @@ class StemCurves:
             "warmth": self.warmth,
             "texture": self.texture,
             "flux": self.flux,
+            "pitch_curve": self.pitch_curve,
         }

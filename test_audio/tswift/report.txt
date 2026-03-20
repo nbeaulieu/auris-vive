@@ -1,17 +1,17 @@
 Auris Vive — Stem Analysis Report
-Generated: 2026-03-19 21:43:57
+Generated: 2026-03-19 22:42:18
 Track:     tswift
-Source:    test_audio/tswift/clip.wav
+Source:    /Users/nicole/dev/auris-vive/test_audio/tswift/clip.wav
 Duration:  30.00s
 BPM:       123.0
 Device:    mps
-Time:      28.6s
+Time:      28.0s
 
 stem            peak       rms   isolation  note
 --------------------------------------------------------------
-bass          0.3113    0.0870      0.4813  strong
-drums         0.5774    0.0801      0.4432  strong
-guitar        0.2982    0.0423      0.2339  present
-other         0.3331    0.0580      0.3213  strong
-piano         0.0011    0.0001      0.0008  silent
-vocals        0.5513    0.1016      0.5622  strong
+bass          0.3168    0.0878      0.4857  strong
+drums         0.5709    0.0802      0.4437  strong
+guitar        0.2848    0.0395      0.2189  present
+other         0.3372    0.0597      0.3305  strong
+piano         0.0039    0.0001      0.0008  silent
+vocals        0.5415    0.1015      0.5617  strong

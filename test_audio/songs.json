@@ -78,5 +78,13 @@
     "start":    "0:50",
     "duration": 30,
     "notes":    "Soul/R&B. Massive vocal, lush production. Good test for vocal isolation quality."
+  },
+  {
+    "name":     "Stick Season — Noah Kahan",
+    "slug":     "noah-kahan",
+    "url":      "https://www.youtube.com/watch?v=JKrDdsgXuso",
+    "start":    "0:53",
+    "duration": 30,
+    "notes":    "Folk/indie. Acoustic guitar + vocals — good pitch extraction test."
   }
 ]

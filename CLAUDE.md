@@ -190,7 +190,7 @@ Do not skip these updates. Stale documentation is a bug.
 | `src/pipeline/drums/` | ✅ Complete | OnsetTranscriber working |
 | `src/pipeline/transcribe.py` | ✅ Complete | 10 tests passing |
 | `src/pipeline/outputs.py` | ✅ Complete | 7 tests passing |
-| `src/pipeline/analyse/` | ✅ Complete | 12 tests passing |
+| `src/pipeline/analyse/` | ✅ Complete | 17 tests passing, includes pitch_curve |
 | `src/pipeline/runner.py` | ✅ Complete | wires all stages |
 | `docs/proto/` | ✅ Complete | TypeScript Vite app, deploys to GitHub Pages |
 | `src/api/` | 🔲 Stub | blocked on Q-API-1, do not touch |

@@ -19,6 +19,11 @@ Coverage map:
     TC-ANA-010  DiskCurvesSource load missing stem → AnalyseError
     TC-ANA-011  MemoryCurvesSource round-trip
     TC-ANA-012  MemoryCurvesSource load missing → KeyError
+    TC-ANA-013  Drums stem → pitch_curve is all zeros
+    TC-ANA-014  Vocals stem with sine wave → pitch_curve has non-zero values
+    TC-ANA-015  at_fps() decimates pitch_curve correctly
+    TC-ANA-016  DiskCurvesSource round-trip preserves pitch_curve
+    TC-ANA-017  Loading old curves without pitch_curve.npy → zeros (backward compat)
 """
 
 from __future__ import annotations
@@ -76,6 +81,7 @@ def _make_curves(n_frames: int = 200, fps: int = FPS) -> StemCurves:
         warmth=rng.random(n_frames).astype(np.float32),
         texture=rng.random(n_frames).astype(np.float32),
         flux=rng.random(n_frames).astype(np.float32),
+        pitch_curve=rng.random(n_frames).astype(np.float32),
         fps=fps,
         sr=SR,
     )
@@ -219,3 +225,64 @@ def test_memory_source_load_missing():
     source = MemoryCurvesSource()
     with pytest.raises(KeyError, match="no curves for stem"):
         source.load("nonexistent")
+
+
+# ── TC-ANA-013  Drums stem → pitch_curve is all zeros ─────────────────────
+
+def test_drums_pitch_curve_is_zeros():
+    stems = _make_stems(names=("drums",))
+    result = analyse(stems, sr=SR, fps=FPS)
+    pc = result["drums"].pitch_curve
+    assert pc.dtype == np.float32
+    assert float(pc.max()) == 0.0
+
+
+# ── TC-ANA-014  Vocals sine wave → pitch_curve has non-zero values ────────
+
+def test_vocals_pitch_curve_has_nonzero():
+    stems = _make_stems(names=("vocals",))
+    result = analyse(stems, sr=SR, fps=FPS)
+    pc = result["vocals"].pitch_curve
+    assert pc.dtype == np.float32
+    assert float(pc.min()) >= 0.0
+    assert float(pc.max()) <= 1.0
+    assert float(pc.max()) > 0.0, "expected non-zero pitch on a 440 Hz sine"
+
+
+# ── TC-ANA-015  at_fps() decimates pitch_curve correctly ──────────────────
+
+def test_at_fps_decimates_pitch_curve():
+    curves = _make_curves(n_frames=200, fps=100)
+    decimated = curves.at_fps(50)
+    assert len(decimated.pitch_curve) == 100
+    np.testing.assert_array_equal(decimated.pitch_curve, curves.pitch_curve[::2])
+
+
+# ── TC-ANA-016  DiskCurvesSource round-trip preserves pitch_curve ─────────
+
+def test_disk_source_pitch_curve_round_trip(tmp_path):
+    source = DiskCurvesSource(tmp_path / "curves")
+    original = _make_curves()
+    source.save("vocals", original)
+    loaded = source.load("vocals")
+    np.testing.assert_array_almost_equal(
+        loaded.pitch_curve, original.pitch_curve, decimal=5,
+    )
+
+
+# ── TC-ANA-017  Loading old curves without pitch_curve.npy → zeros ────────
+
+def test_disk_source_backward_compat_no_pitch(tmp_path):
+    """Curves saved before pitch_curve existed should load with zeros."""
+    source = DiskCurvesSource(tmp_path / "curves")
+    original = _make_curves()
+    source.save("bass", original)
+
+    # Remove the pitch_curve file to simulate old data
+    pitch_file = tmp_path / "curves" / "bass_pitch_curve.npy"
+    pitch_file.unlink()
+
+    loaded = source.load("bass")
+    assert loaded.pitch_curve.dtype == np.float32
+    assert float(loaded.pitch_curve.max()) == 0.0
+    assert len(loaded.pitch_curve) == len(loaded.energy)

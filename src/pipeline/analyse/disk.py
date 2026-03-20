@@ -71,6 +71,11 @@ class DiskCurvesSource(CurvesSource):
         arrays: dict[str, np.ndarray] = {}
         for name in CURVE_NAMES:
             npy_path = self._base / f"{stem_name}_{name}.npy"
+            if name == "pitch_curve" and not npy_path.exists():
+                # Backward compat: old curves lack pitch_curve — default to zeros
+                ref = next(iter(arrays.values()))
+                arrays[name] = np.zeros(len(ref), dtype=np.float32)
+                continue
             if not npy_path.exists():
                 raise AnalyseError(f"curve file not found: {npy_path}")
             arrays[name] = np.load(str(npy_path)).astype(np.float32)

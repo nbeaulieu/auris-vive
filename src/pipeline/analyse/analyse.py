@@ -14,6 +14,8 @@ from __future__ import annotations
 
 import logging
 
+import time
+
 import librosa
 import numpy as np
 from scipy.signal import butter, sosfiltfilt
@@ -25,6 +27,9 @@ logger = logging.getLogger(__name__)
 TARGET_SR: int = 44_100
 DEFAULT_FPS: int = 100
 _WARMTH_CUTOFF: float = 300.0  # Hz — boundary for low-frequency energy
+_PITCH_FMIN: float = librosa.note_to_hz("C2")   # ~65 Hz
+_PITCH_FMAX: float = librosa.note_to_hz("C7")   # ~2093 Hz
+_DRUMS_STEMS: frozenset[str] = frozenset({"drums"})
 
 
 # ── Public interface ──────────────────────────────────────────────────────────
@@ -70,7 +75,9 @@ def analyse(
                 f"stem '{stem_name}' is {type(stem).__name__}, expected np.ndarray"
             )
         try:
-            result[stem_name] = _extract_curves(stem, sr, hop_length, fps)
+            result[stem_name] = _extract_curves(
+                stem, sr, hop_length, fps, stem_name,
+            )
         except AnalyseError:
             raise
         except Exception as exc:
@@ -89,8 +96,9 @@ def _extract_curves(
     sr: int,
     hop_length: int,
     fps: int,
+    stem_name: str = "",
 ) -> StemCurves:
-    """Extract all six curves from a single stem waveform."""
+    """Extract all seven curves from a single stem waveform."""
     # Mix to mono for spectral features
     mono = stem.mean(axis=0) if stem.ndim == 2 else stem
 
@@ -127,9 +135,12 @@ def _extract_curves(
     flux_raw = np.concatenate([[0.0], flux_raw])
     flux = _normalise(_apply_envelope(flux_raw))
 
+    # Pitch — pyin on pitched stems, zeros for drums
+    pitch_curve = _extract_pitch(mono, sr, hop_length, stem_name)
+
     # Align all curves to the shortest length (off-by-one from different features)
     min_len = min(len(energy), len(brightness), len(onset),
-                  len(warmth), len(texture), len(flux))
+                  len(warmth), len(texture), len(flux), len(pitch_curve))
     return StemCurves(
         energy=energy[:min_len],
         brightness=brightness[:min_len],
@@ -137,9 +148,48 @@ def _extract_curves(
         warmth=warmth[:min_len],
         texture=texture[:min_len],
         flux=flux[:min_len],
+        pitch_curve=pitch_curve[:min_len],
         fps=fps,
         sr=sr,
     )
+
+
+# ── Pitch extraction ──────────────────────────────────────────────────────────
+
+def _extract_pitch(
+    mono: np.ndarray,
+    sr: int,
+    hop_length: int,
+    stem_name: str,
+) -> np.ndarray:
+    """
+    Extract normalised fundamental frequency curve via librosa.pyin.
+
+    Returns zeros for drum stems (unpitched — pyin output is meaningless).
+    Unvoiced frames are set to 0.0; voiced frames are normalised by fmax.
+    """
+    n_frames = 1 + len(mono) // hop_length
+
+    if stem_name in _DRUMS_STEMS:
+        return np.zeros(n_frames, dtype=np.float32)
+
+    t0 = time.monotonic()
+    f0, _voiced_flag, _voiced_probs = librosa.pyin(
+        mono,
+        fmin=_PITCH_FMIN,
+        fmax=_PITCH_FMAX,
+        sr=sr,
+        hop_length=hop_length,
+        fill_na=np.nan,
+    )
+    elapsed = time.monotonic() - t0
+    logger.info("pitch extraction: %s  (%.1fs)", stem_name, elapsed)
+
+    # NaN → 0.0 (unvoiced), then normalise voiced frames to [0, 1]
+    f0 = np.where(np.isnan(f0), 0.0, f0)
+    f0 = np.clip(f0 / _PITCH_FMAX, 0.0, 1.0)
+
+    return _apply_envelope(f0).astype(np.float32)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
