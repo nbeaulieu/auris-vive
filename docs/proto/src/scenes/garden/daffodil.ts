@@ -6,7 +6,19 @@ import { remapPitch } from '../../utils';
  * 3 flowers, petal bloom from pitch, sway from energy.
  */
 export class DaffodilOrganism {
+  opacity = 1;
+  frozen = false;
+
   render(frame: StemFrame, ctx: CanvasRenderingContext2D, w: number, h: number, elapsed: number): void {
+    const isSilent = frame.energy < 0.05;
+    this.opacity += isSilent ? -0.033 : 0.05;
+    this.opacity = Math.max(0, Math.min(1, this.opacity));
+    if (isSilent && this.opacity < 0.01) { this.frozen = true; return; }
+    this.frozen = false;
+
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+
     const groundY = h * 0.7;
     const positions = [w * 0.3, w * 0.48, w * 0.62];
 
@@ -63,5 +75,7 @@ export class DaffodilOrganism {
 
       ctx.restore();
     }
+
+    ctx.restore();
   }
 }

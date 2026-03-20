@@ -9,5 +9,6 @@ export abstract class Scene {
     width: number,
     height: number,
     elapsed: number,
+    stemEnabled: Record<StemName, boolean>,
   ): void;
 }

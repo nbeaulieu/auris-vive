@@ -1,0 +1,471 @@
+{
+  "slug": "noah-kahan-porchlight",
+  "language": "en",
+  "words": [
+    {
+      "word": "I",
+      "start": 0.0,
+      "end": 0.9
+    },
+    {
+      "word": "don't",
+      "start": 0.9,
+      "end": 1.08
+    },
+    {
+      "word": "know",
+      "start": 1.08,
+      "end": 1.48
+    },
+    {
+      "word": "I'm",
+      "start": 1.48,
+      "end": 2.02
+    },
+    {
+      "word": "alone,",
+      "start": 2.02,
+      "end": 2.52
+    },
+    {
+      "word": "I'm",
+      "start": 2.52,
+      "end": 3.06
+    },
+    {
+      "word": "alone,",
+      "start": 3.06,
+      "end": 3.6
+    },
+    {
+      "word": "I'm",
+      "start": 3.92,
+      "end": 4.08
+    },
+    {
+      "word": "alone,",
+      "start": 4.08,
+      "end": 4.34
+    },
+    {
+      "word": "I'm",
+      "start": 4.34,
+      "end": 5.24
+    },
+    {
+      "word": "alone,",
+      "start": 5.24,
+      "end": 5.82
+    },
+    {
+      "word": "I'm",
+      "start": 6.34,
+      "end": 8.12
+    },
+    {
+      "word": "alone",
+      "start": 8.12,
+      "end": 8.16
+    },
+    {
+      "word": "I",
+      "start": 8.16,
+      "end": 8.84
+    },
+    {
+      "word": "hope",
+      "start": 8.84,
+      "end": 9.04
+    },
+    {
+      "word": "you",
+      "start": 9.04,
+      "end": 9.24
+    },
+    {
+      "word": "tell",
+      "start": 9.24,
+      "end": 9.54
+    },
+    {
+      "word": "me",
+      "start": 9.54,
+      "end": 9.8
+    },
+    {
+      "word": "that",
+      "start": 9.8,
+      "end": 10.02
+    },
+    {
+      "word": "you're",
+      "start": 10.02,
+      "end": 10.3
+    },
+    {
+      "word": "finding",
+      "start": 10.3,
+      "end": 10.6
+    },
+    {
+      "word": "town",
+      "start": 10.6,
+      "end": 10.96
+    },
+    {
+      "word": "that",
+      "start": 10.96,
+      "end": 11.2
+    },
+    {
+      "word": "you",
+      "start": 11.2,
+      "end": 11.36
+    },
+    {
+      "word": "lost",
+      "start": 11.36,
+      "end": 11.6
+    },
+    {
+      "word": "a",
+      "start": 11.6,
+      "end": 11.78
+    },
+    {
+      "word": "taste",
+      "start": 11.78,
+      "end": 12.0
+    },
+    {
+      "word": "of",
+      "start": 12.0,
+      "end": 12.2
+    },
+    {
+      "word": "face",
+      "start": 12.2,
+      "end": 12.42
+    },
+    {
+      "word": "to",
+      "start": 12.42,
+      "end": 12.6
+    },
+    {
+      "word": "crowd",
+      "start": 12.6,
+      "end": 12.94
+    },
+    {
+      "word": "The",
+      "start": 12.94,
+      "end": 13.14
+    },
+    {
+      "word": "Buddha",
+      "start": 13.14,
+      "end": 13.36
+    },
+    {
+      "word": "made",
+      "start": 13.36,
+      "end": 13.94
+    },
+    {
+      "word": "you",
+      "start": 13.94,
+      "end": 14.24
+    },
+    {
+      "word": "famous,",
+      "start": 14.24,
+      "end": 14.72
+    },
+    {
+      "word": "made",
+      "start": 14.92,
+      "end": 15.06
+    },
+    {
+      "word": "you",
+      "start": 15.06,
+      "end": 15.3
+    },
+    {
+      "word": "sick",
+      "start": 15.3,
+      "end": 15.86
+    },
+    {
+      "word": "And",
+      "start": 16.66,
+      "end": 17.14
+    },
+    {
+      "word": "you",
+      "start": 17.14,
+      "end": 17.26
+    },
+    {
+      "word": "can",
+      "start": 17.26,
+      "end": 17.4
+    },
+    {
+      "word": "only",
+      "start": 17.4,
+      "end": 17.68
+    },
+    {
+      "word": "do",
+      "start": 17.68,
+      "end": 18.02
+    },
+    {
+      "word": "a",
+      "start": 18.02,
+      "end": 18.16
+    },
+    {
+      "word": "tale",
+      "start": 18.16,
+      "end": 18.4
+    },
+    {
+      "word": "of",
+      "start": 18.4,
+      "end": 18.84
+    },
+    {
+      "word": "lies",
+      "start": 18.84,
+      "end": 19.1
+    },
+    {
+      "word": "that",
+      "start": 19.1,
+      "end": 19.22
+    },
+    {
+      "word": "ain't",
+      "start": 19.22,
+      "end": 19.46
+    },
+    {
+      "word": "up",
+      "start": 19.46,
+      "end": 19.62
+    },
+    {
+      "word": "to",
+      "start": 19.62,
+      "end": 19.82
+    },
+    {
+      "word": "you",
+      "start": 19.82,
+      "end": 20.04
+    },
+    {
+      "word": "To",
+      "start": 20.04,
+      "end": 20.16
+    },
+    {
+      "word": "make",
+      "start": 20.16,
+      "end": 20.4
+    },
+    {
+      "word": "it",
+      "start": 20.4,
+      "end": 20.64
+    },
+    {
+      "word": "out",
+      "start": 20.64,
+      "end": 21.06
+    },
+    {
+      "word": "and",
+      "start": 21.06,
+      "end": 21.22
+    },
+    {
+      "word": "there",
+      "start": 21.22,
+      "end": 21.44
+    },
+    {
+      "word": "ain't",
+      "start": 21.44,
+      "end": 21.64
+    },
+    {
+      "word": "no",
+      "start": 21.64,
+      "end": 21.88
+    },
+    {
+      "word": "shame",
+      "start": 21.88,
+      "end": 22.14
+    },
+    {
+      "word": "in",
+      "start": 22.14,
+      "end": 22.52
+    },
+    {
+      "word": "calling",
+      "start": 22.52,
+      "end": 22.74
+    },
+    {
+      "word": "this",
+      "start": 22.74,
+      "end": 23.14
+    },
+    {
+      "word": "thing",
+      "start": 23.14,
+      "end": 23.44
+    },
+    {
+      "word": "But",
+      "start": 23.44,
+      "end": 23.78
+    },
+    {
+      "word": "you",
+      "start": 23.78,
+      "end": 25.32
+    },
+    {
+      "word": "don't,",
+      "start": 25.32,
+      "end": 26.08
+    },
+    {
+      "word": "you",
+      "start": 26.08,
+      "end": 26.32
+    },
+    {
+      "word": "don't,",
+      "start": 26.32,
+      "end": 27.14
+    },
+    {
+      "word": "you",
+      "start": 27.22,
+      "end": 27.36
+    },
+    {
+      "word": "don't,",
+      "start": 27.36,
+      "end": 28.14
+    },
+    {
+      "word": "you",
+      "start": 28.14,
+      "end": 28.3
+    },
+    {
+      "word": "don't,",
+      "start": 28.3,
+      "end": 30.14
+    },
+    {
+      "word": "you",
+      "start": 30.14,
+      "end": 31.28
+    },
+    {
+      "word": "don't",
+      "start": 31.28,
+      "end": 32.44
+    },
+    {
+      "word": "You're",
+      "start": 32.98,
+      "end": 33.32
+    },
+    {
+      "word": "a",
+      "start": 33.32,
+      "end": 33.42
+    },
+    {
+      "word": "ghost,",
+      "start": 33.42,
+      "end": 34.04
+    },
+    {
+      "word": "you're",
+      "start": 34.2,
+      "end": 34.38
+    },
+    {
+      "word": "a",
+      "start": 34.38,
+      "end": 34.54
+    },
+    {
+      "word": "ghost,",
+      "start": 34.54,
+      "end": 35.1
+    },
+    {
+      "word": "you're",
+      "start": 35.1,
+      "end": 36.38
+    },
+    {
+      "word": "a",
+      "start": 36.38,
+      "end": 36.58
+    },
+    {
+      "word": "ghost",
+      "start": 36.58,
+      "end": 37.08
+    },
+    {
+      "word": "in",
+      "start": 37.08,
+      "end": 37.32
+    },
+    {
+      "word": "your",
+      "start": 37.32,
+      "end": 37.62
+    },
+    {
+      "word": "voice",
+      "start": 37.62,
+      "end": 38.78
+    },
+    {
+      "word": "is",
+      "start": 38.78,
+      "end": 40.24
+    },
+    {
+      "word": "spreading",
+      "start": 40.24,
+      "end": 41.02
+    },
+    {
+      "word": "to",
+      "start": 41.02,
+      "end": 42.66
+    },
+    {
+      "word": "mountains",
+      "start": 42.66,
+      "end": 43.92
+    }
+  ]
+}

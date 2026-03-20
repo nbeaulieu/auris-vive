@@ -1,0 +1,366 @@
+{
+  "slug": "grouplove",
+  "language": "en",
+  "words": [
+    {
+      "word": "You",
+      "start": 0.0,
+      "end": 0.34
+    },
+    {
+      "word": "know,",
+      "start": 0.34,
+      "end": 1.72
+    },
+    {
+      "word": "don't",
+      "start": 1.72,
+      "end": 5.78
+    },
+    {
+      "word": "take",
+      "start": 5.78,
+      "end": 6.22
+    },
+    {
+      "word": "me",
+      "start": 6.22,
+      "end": 6.74
+    },
+    {
+      "word": "to",
+      "start": 6.74,
+      "end": 7.36
+    },
+    {
+      "word": "the",
+      "start": 7.36,
+      "end": 8.02
+    },
+    {
+      "word": "times",
+      "start": 8.02,
+      "end": 8.68
+    },
+    {
+      "word": "Don't",
+      "start": 8.68,
+      "end": 9.92
+    },
+    {
+      "word": "wave",
+      "start": 9.92,
+      "end": 10.46
+    },
+    {
+      "word": "no",
+      "start": 10.46,
+      "end": 11.08
+    },
+    {
+      "word": "goodbyes,",
+      "start": 11.08,
+      "end": 13.56
+    },
+    {
+      "word": "go!",
+      "start": 13.56,
+      "end": 13.98
+    },
+    {
+      "word": "Right!",
+      "start": 17.54,
+      "end": 17.98
+    },
+    {
+      "word": "One,",
+      "start": 19.46,
+      "end": 20.06
+    },
+    {
+      "word": "two,",
+      "start": 20.42,
+      "end": 20.5
+    },
+    {
+      "word": "three,",
+      "start": 20.62,
+      "end": 21.18
+    },
+    {
+      "word": "four",
+      "start": 21.5,
+      "end": 21.66
+    },
+    {
+      "word": "Don't",
+      "start": 21.66,
+      "end": 22.58
+    },
+    {
+      "word": "leave",
+      "start": 22.58,
+      "end": 22.7
+    },
+    {
+      "word": "me",
+      "start": 22.7,
+      "end": 22.92
+    },
+    {
+      "word": "to",
+      "start": 22.92,
+      "end": 23.16
+    },
+    {
+      "word": "the",
+      "start": 23.16,
+      "end": 23.48
+    },
+    {
+      "word": "times,",
+      "start": 23.48,
+      "end": 23.64
+    },
+    {
+      "word": "I'll",
+      "start": 24.62,
+      "end": 24.88
+    },
+    {
+      "word": "stay",
+      "start": 24.88,
+      "end": 24.88
+    },
+    {
+      "word": "in",
+      "start": 24.88,
+      "end": 25.08
+    },
+    {
+      "word": "all",
+      "start": 25.08,
+      "end": 25.42
+    },
+    {
+      "word": "life",
+      "start": 25.42,
+      "end": 26.16
+    },
+    {
+      "word": "I'll",
+      "start": 26.16,
+      "end": 26.74
+    },
+    {
+      "word": "give",
+      "start": 26.74,
+      "end": 26.88
+    },
+    {
+      "word": "real",
+      "start": 26.88,
+      "end": 27.56
+    },
+    {
+      "word": "hearts",
+      "start": 27.56,
+      "end": 28.18
+    },
+    {
+      "word": "from",
+      "start": 28.18,
+      "end": 28.54
+    },
+    {
+      "word": "the",
+      "start": 28.54,
+      "end": 28.86
+    },
+    {
+      "word": "power",
+      "start": 28.86,
+      "end": 28.96
+    },
+    {
+      "word": "and",
+      "start": 28.96,
+      "end": 29.32
+    },
+    {
+      "word": "build",
+      "start": 29.32,
+      "end": 29.62
+    },
+    {
+      "word": "a",
+      "start": 29.62,
+      "end": 30.04
+    },
+    {
+      "word": "flag",
+      "start": 30.04,
+      "end": 30.38
+    },
+    {
+      "word": "My",
+      "start": 30.38,
+      "end": 30.92
+    },
+    {
+      "word": "hands",
+      "start": 30.92,
+      "end": 31.26
+    },
+    {
+      "word": "on",
+      "start": 31.26,
+      "end": 31.46
+    },
+    {
+      "word": "your",
+      "start": 31.46,
+      "end": 31.74
+    },
+    {
+      "word": "other",
+      "start": 31.74,
+      "end": 32.38
+    },
+    {
+      "word": "feet,",
+      "start": 32.38,
+      "end": 32.82
+    },
+    {
+      "word": "a",
+      "start": 33.12,
+      "end": 33.12
+    },
+    {
+      "word": "bit",
+      "start": 33.12,
+      "end": 33.4
+    },
+    {
+      "word": "of",
+      "start": 33.4,
+      "end": 33.54
+    },
+    {
+      "word": "a",
+      "start": 33.54,
+      "end": 33.68
+    },
+    {
+      "word": "bend",
+      "start": 33.68,
+      "end": 33.94
+    },
+    {
+      "word": "-sky",
+      "start": 33.94,
+      "end": 34.42
+    },
+    {
+      "word": "My",
+      "start": 34.42,
+      "end": 35.16
+    },
+    {
+      "word": "best",
+      "start": 35.16,
+      "end": 35.42
+    },
+    {
+      "word": "protestin'",
+      "start": 35.42,
+      "end": 36.24
+    },
+    {
+      "word": "that's",
+      "start": 36.36,
+      "end": 36.84
+    },
+    {
+      "word": "won't",
+      "start": 36.84,
+      "end": 37.18
+    },
+    {
+      "word": "be",
+      "start": 37.18,
+      "end": 37.36
+    },
+    {
+      "word": "still",
+      "start": 37.36,
+      "end": 37.78
+    },
+    {
+      "word": "been",
+      "start": 37.78,
+      "end": 38.1
+    },
+    {
+      "word": "by",
+      "start": 38.1,
+      "end": 38.52
+    },
+    {
+      "word": "Don't",
+      "start": 38.68,
+      "end": 39.64
+    },
+    {
+      "word": "take",
+      "start": 39.64,
+      "end": 40.24
+    },
+    {
+      "word": "me",
+      "start": 40.24,
+      "end": 40.72
+    },
+    {
+      "word": "to",
+      "start": 40.72,
+      "end": 41.2
+    },
+    {
+      "word": "the",
+      "start": 41.2,
+      "end": 41.78
+    },
+    {
+      "word": "times",
+      "start": 41.78,
+      "end": 42.58
+    },
+    {
+      "word": "Don't",
+      "start": 42.58,
+      "end": 44.04
+    },
+    {
+      "word": "wave",
+      "start": 44.04,
+      "end": 44.52
+    },
+    {
+      "word": "no",
+      "start": 44.52,
+      "end": 44.98
+    },
+    {
+      "word": "goodbyes,",
+      "start": 44.98,
+      "end": 44.98
+    },
+    {
+      "word": "go!",
+      "start": 44.98,
+      "end": 44.98
+    }
+  ]
+}

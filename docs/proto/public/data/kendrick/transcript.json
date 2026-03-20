@@ -1,0 +1,896 @@
+{
+  "slug": "kendrick",
+  "language": "en",
+  "words": [
+    {
+      "word": "Musta",
+      "start": 0.0,
+      "end": 0.7
+    },
+    {
+      "word": "hung",
+      "start": 0.7,
+      "end": 0.82
+    },
+    {
+      "word": "a",
+      "start": 0.82,
+      "end": 0.98
+    },
+    {
+      "word": "beat",
+      "start": 0.98,
+      "end": 1.14
+    },
+    {
+      "word": "hoe",
+      "start": 1.14,
+      "end": 1.42
+    },
+    {
+      "word": "deep",
+      "start": 1.42,
+      "end": 1.74
+    },
+    {
+      "word": "boat",
+      "start": 1.74,
+      "end": 2.12
+    },
+    {
+      "word": "any",
+      "start": 2.12,
+      "end": 2.38
+    },
+    {
+      "word": "rat",
+      "start": 2.38,
+      "end": 2.62
+    },
+    {
+      "word": "nigga",
+      "start": 2.62,
+      "end": 2.9
+    },
+    {
+      "word": "here",
+      "start": 2.9,
+      "end": 3.24
+    },
+    {
+      "word": "free",
+      "start": 3.24,
+      "end": 3.5
+    },
+    {
+      "word": "throw",
+      "start": 3.5,
+      "end": 3.78
+    },
+    {
+      "word": "man",
+      "start": 3.78,
+      "end": 4.12
+    },
+    {
+      "word": "down",
+      "start": 4.12,
+      "end": 4.42
+    },
+    {
+      "word": "call",
+      "start": 4.42,
+      "end": 4.7
+    },
+    {
+      "word": "a",
+      "start": 4.7,
+      "end": 4.84
+    },
+    {
+      "word": "ember",
+      "start": 4.84,
+      "end": 5.06
+    },
+    {
+      "word": "the",
+      "start": 5.06,
+      "end": 5.2
+    },
+    {
+      "word": "lambs",
+      "start": 5.2,
+      "end": 5.44
+    },
+    {
+      "word": "tell",
+      "start": 5.44,
+      "end": 5.6
+    },
+    {
+      "word": "him",
+      "start": 5.6,
+      "end": 5.7
+    },
+    {
+      "word": "Breathe",
+      "start": 5.7,
+      "end": 5.92
+    },
+    {
+      "word": "bro",
+      "start": 5.92,
+      "end": 6.18
+    },
+    {
+      "word": "nela",
+      "start": 6.18,
+      "end": 6.5
+    },
+    {
+      "word": "nigger",
+      "start": 6.5,
+      "end": 6.78
+    },
+    {
+      "word": "to",
+      "start": 6.78,
+      "end": 7.0
+    },
+    {
+      "word": "the",
+      "start": 7.0,
+      "end": 7.1
+    },
+    {
+      "word": "cross",
+      "start": 7.1,
+      "end": 7.28
+    },
+    {
+      "word": "he",
+      "start": 7.28,
+      "end": 7.46
+    },
+    {
+      "word": "walk",
+      "start": 7.46,
+      "end": 7.62
+    },
+    {
+      "word": "around",
+      "start": 7.62,
+      "end": 7.88
+    },
+    {
+      "word": "like",
+      "start": 7.88,
+      "end": 8.04
+    },
+    {
+      "word": "T.",
+      "start": 8.04,
+      "end": 8.26
+    },
+    {
+      "word": "So",
+      "start": 8.3,
+      "end": 8.46
+    },
+    {
+      "word": "what's",
+      "start": 8.46,
+      "end": 8.76
+    },
+    {
+      "word": "up",
+      "start": 8.76,
+      "end": 8.88
+    },
+    {
+      "word": "with",
+      "start": 8.88,
+      "end": 9.02
+    },
+    {
+      "word": "these",
+      "start": 9.02,
+      "end": 9.18
+    },
+    {
+      "word": "your",
+      "start": 9.18,
+      "end": 9.3
+    },
+    {
+      "word": "bloody",
+      "start": 9.3,
+      "end": 9.54
+    },
+    {
+      "word": "ass",
+      "start": 9.54,
+      "end": 9.82
+    },
+    {
+      "word": "niggers",
+      "start": 9.82,
+      "end": 10.1
+    },
+    {
+      "word": "trying",
+      "start": 10.1,
+      "end": 10.34
+    },
+    {
+      "word": "to",
+      "start": 10.34,
+      "end": 10.44
+    },
+    {
+      "word": "see",
+      "start": 10.44,
+      "end": 10.64
+    },
+    {
+      "word": "Compton",
+      "start": 10.64,
+      "end": 11.04
+    },
+    {
+      "word": "they",
+      "start": 11.04,
+      "end": 11.38
+    },
+    {
+      "word": "industry",
+      "start": 11.38,
+      "end": 11.72
+    },
+    {
+      "word": "can",
+      "start": 11.72,
+      "end": 11.94
+    },
+    {
+      "word": "hate",
+      "start": 11.94,
+      "end": 12.1
+    },
+    {
+      "word": "you",
+      "start": 12.1,
+      "end": 12.22
+    },
+    {
+      "word": "fuck",
+      "start": 12.22,
+      "end": 12.44
+    },
+    {
+      "word": "them",
+      "start": 12.44,
+      "end": 12.62
+    },
+    {
+      "word": "all",
+      "start": 12.62,
+      "end": 12.74
+    },
+    {
+      "word": "anything",
+      "start": 12.74,
+      "end": 12.94
+    },
+    {
+      "word": "mama.",
+      "start": 12.94,
+      "end": 13.22
+    },
+    {
+      "word": "How",
+      "start": 13.22,
+      "end": 13.46
+    },
+    {
+      "word": "many",
+      "start": 13.46,
+      "end": 13.64
+    },
+    {
+      "word": "option",
+      "start": 13.64,
+      "end": 14.0
+    },
+    {
+      "word": "really",
+      "start": 14.0,
+      "end": 14.28
+    },
+    {
+      "word": "got",
+      "start": 14.28,
+      "end": 14.52
+    },
+    {
+      "word": "how",
+      "start": 14.52,
+      "end": 14.66
+    },
+    {
+      "word": "many",
+      "start": 14.66,
+      "end": 14.8
+    },
+    {
+      "word": "is",
+      "start": 14.8,
+      "end": 14.94
+    },
+    {
+      "word": "too",
+      "start": 14.94,
+      "end": 15.12
+    },
+    {
+      "word": "many",
+      "start": 15.12,
+      "end": 15.32
+    },
+    {
+      "word": "options?",
+      "start": 15.32,
+      "end": 15.76
+    },
+    {
+      "word": "I'm",
+      "start": 15.76,
+      "end": 16.14
+    },
+    {
+      "word": "finna",
+      "start": 16.14,
+      "end": 16.36
+    },
+    {
+      "word": "pass",
+      "start": 16.36,
+      "end": 16.64
+    },
+    {
+      "word": "on",
+      "start": 16.64,
+      "end": 16.86
+    },
+    {
+      "word": "this",
+      "start": 16.86,
+      "end": 17.0
+    },
+    {
+      "word": "body.",
+      "start": 17.0,
+      "end": 17.26
+    },
+    {
+      "word": "I'm",
+      "start": 17.38,
+      "end": 17.46
+    },
+    {
+      "word": "John",
+      "start": 17.46,
+      "end": 17.66
+    },
+    {
+      "word": "Stockton",
+      "start": 17.66,
+      "end": 18.26
+    },
+    {
+      "word": "Beech",
+      "start": 20.66,
+      "end": 21.1
+    },
+    {
+      "word": "your",
+      "start": 21.1,
+      "end": 21.18
+    },
+    {
+      "word": "ass",
+      "start": 21.18,
+      "end": 21.36
+    },
+    {
+      "word": "and",
+      "start": 21.36,
+      "end": 21.52
+    },
+    {
+      "word": "hide",
+      "start": 21.52,
+      "end": 21.6
+    },
+    {
+      "word": "the",
+      "start": 21.6,
+      "end": 21.76
+    },
+    {
+      "word": "bible",
+      "start": 21.76,
+      "end": 22.04
+    },
+    {
+      "word": "of",
+      "start": 22.04,
+      "end": 22.26
+    },
+    {
+      "word": "God",
+      "start": 22.26,
+      "end": 22.38
+    },
+    {
+      "word": "watching",
+      "start": 22.38,
+      "end": 22.84
+    },
+    {
+      "word": "Sometimes",
+      "start": 22.84,
+      "end": 23.62
+    },
+    {
+      "word": "you",
+      "start": 23.62,
+      "end": 23.86
+    },
+    {
+      "word": "gotta",
+      "start": 23.86,
+      "end": 24.0
+    },
+    {
+      "word": "pop",
+      "start": 24.0,
+      "end": 24.3
+    },
+    {
+      "word": "out",
+      "start": 24.3,
+      "end": 24.54
+    },
+    {
+      "word": "and",
+      "start": 24.54,
+      "end": 24.68
+    },
+    {
+      "word": "show",
+      "start": 24.68,
+      "end": 24.9
+    },
+    {
+      "word": "niggers",
+      "start": 24.9,
+      "end": 25.14
+    },
+    {
+      "word": "Certify",
+      "start": 25.14,
+      "end": 25.7
+    },
+    {
+      "word": "boozey",
+      "start": 25.7,
+      "end": 26.12
+    },
+    {
+      "word": "man.",
+      "start": 26.12,
+      "end": 26.24
+    },
+    {
+      "word": "I",
+      "start": 26.38,
+      "end": 26.4
+    },
+    {
+      "word": "don't",
+      "start": 26.4,
+      "end": 26.54
+    },
+    {
+      "word": "want",
+      "start": 26.54,
+      "end": 26.66
+    },
+    {
+      "word": "it",
+      "start": 26.66,
+      "end": 26.76
+    },
+    {
+      "word": "up",
+      "start": 26.76,
+      "end": 26.92
+    },
+    {
+      "word": "to",
+      "start": 26.92,
+      "end": 27.04
+    },
+    {
+      "word": "school",
+      "start": 27.04,
+      "end": 27.26
+    },
+    {
+      "word": "with",
+      "start": 27.26,
+      "end": 27.44
+    },
+    {
+      "word": "him",
+      "start": 27.44,
+      "end": 27.54
+    },
+    {
+      "word": "walking",
+      "start": 27.54,
+      "end": 27.9
+    },
+    {
+      "word": "down",
+      "start": 27.9,
+      "end": 28.16
+    },
+    {
+      "word": "whole",
+      "start": 28.16,
+      "end": 28.44
+    },
+    {
+      "word": "time",
+      "start": 28.44,
+      "end": 28.72
+    },
+    {
+      "word": "I",
+      "start": 28.72,
+      "end": 28.88
+    },
+    {
+      "word": "know",
+      "start": 28.88,
+      "end": 29.04
+    },
+    {
+      "word": "he",
+      "start": 29.04,
+      "end": 29.16
+    },
+    {
+      "word": "got",
+      "start": 29.16,
+      "end": 29.3
+    },
+    {
+      "word": "some",
+      "start": 29.3,
+      "end": 29.46
+    },
+    {
+      "word": "horn",
+      "start": 29.46,
+      "end": 29.74
+    },
+    {
+      "word": "him",
+      "start": 29.74,
+      "end": 29.94
+    },
+    {
+      "word": "pulling",
+      "start": 29.94,
+      "end": 30.32
+    },
+    {
+      "word": "him",
+      "start": 30.32,
+      "end": 30.54
+    },
+    {
+      "word": "extort",
+      "start": 30.54,
+      "end": 31.02
+    },
+    {
+      "word": "shit",
+      "start": 31.02,
+      "end": 31.34
+    },
+    {
+      "word": "bully",
+      "start": 31.34,
+      "end": 31.66
+    },
+    {
+      "word": "def",
+      "start": 31.66,
+      "end": 31.86
+    },
+    {
+      "word": "know",
+      "start": 31.86,
+      "end": 32.04
+    },
+    {
+      "word": "him",
+      "start": 32.04,
+      "end": 32.32
+    },
+    {
+      "word": "say",
+      "start": 32.32,
+      "end": 32.6
+    },
+    {
+      "word": "Drake.",
+      "start": 32.6,
+      "end": 32.94
+    },
+    {
+      "word": "I",
+      "start": 33.26,
+      "end": 33.62
+    },
+    {
+      "word": "hear",
+      "start": 33.62,
+      "end": 33.8
+    },
+    {
+      "word": "you",
+      "start": 33.8,
+      "end": 33.92
+    },
+    {
+      "word": "like",
+      "start": 33.92,
+      "end": 34.04
+    },
+    {
+      "word": "him",
+      "start": 34.04,
+      "end": 34.2
+    },
+    {
+      "word": "young",
+      "start": 34.2,
+      "end": 34.44
+    },
+    {
+      "word": "You",
+      "start": 34.44,
+      "end": 35.12
+    },
+    {
+      "word": "better",
+      "start": 35.12,
+      "end": 35.24
+    },
+    {
+      "word": "not",
+      "start": 35.24,
+      "end": 35.42
+    },
+    {
+      "word": "have",
+      "start": 35.42,
+      "end": 35.58
+    },
+    {
+      "word": "a",
+      "start": 35.58,
+      "end": 35.66
+    },
+    {
+      "word": "go",
+      "start": 35.66,
+      "end": 35.8
+    },
+    {
+      "word": "to",
+      "start": 35.8,
+      "end": 35.92
+    },
+    {
+      "word": "sell",
+      "start": 35.92,
+      "end": 36.18
+    },
+    {
+      "word": "black",
+      "start": 36.18,
+      "end": 36.46
+    },
+    {
+      "word": "one",
+      "start": 36.46,
+      "end": 36.86
+    },
+    {
+      "word": "to",
+      "start": 36.86,
+      "end": 37.5
+    },
+    {
+      "word": "any",
+      "start": 37.5,
+      "end": 37.66
+    },
+    {
+      "word": "bitch",
+      "start": 37.66,
+      "end": 37.92
+    },
+    {
+      "word": "that",
+      "start": 37.92,
+      "end": 38.06
+    },
+    {
+      "word": "talk",
+      "start": 38.06,
+      "end": 38.28
+    },
+    {
+      "word": "to",
+      "start": 38.28,
+      "end": 38.5
+    },
+    {
+      "word": "him",
+      "start": 38.5,
+      "end": 38.6
+    },
+    {
+      "word": "and",
+      "start": 38.6,
+      "end": 38.74
+    },
+    {
+      "word": "then",
+      "start": 38.74,
+      "end": 38.86
+    },
+    {
+      "word": "love",
+      "start": 38.86,
+      "end": 39.28
+    },
+    {
+      "word": "just",
+      "start": 39.28,
+      "end": 39.84
+    },
+    {
+      "word": "make",
+      "start": 39.84,
+      "end": 40.02
+    },
+    {
+      "word": "sure",
+      "start": 40.02,
+      "end": 40.24
+    },
+    {
+      "word": "you",
+      "start": 40.24,
+      "end": 40.42
+    },
+    {
+      "word": "hide",
+      "start": 40.42,
+      "end": 40.56
+    },
+    {
+      "word": "your",
+      "start": 40.56,
+      "end": 40.72
+    },
+    {
+      "word": "little",
+      "start": 40.72,
+      "end": 40.94
+    },
+    {
+      "word": "sister",
+      "start": 40.94,
+      "end": 41.24
+    },
+    {
+      "word": "from",
+      "start": 41.24,
+      "end": 41.5
+    },
+    {
+      "word": "them",
+      "start": 41.5,
+      "end": 41.82
+    },
+    {
+      "word": "They",
+      "start": 41.82,
+      "end": 42.22
+    },
+    {
+      "word": "tell",
+      "start": 42.22,
+      "end": 42.38
+    },
+    {
+      "word": "me",
+      "start": 42.38,
+      "end": 42.48
+    },
+    {
+      "word": "chub's",
+      "start": 42.48,
+      "end": 42.82
+    },
+    {
+      "word": "the",
+      "start": 42.82,
+      "end": 42.9
+    },
+    {
+      "word": "only",
+      "start": 42.9,
+      "end": 43.08
+    },
+    {
+      "word": "one",
+      "start": 43.08,
+      "end": 43.28
+    },
+    {
+      "word": "they",
+      "start": 43.28,
+      "end": 43.38
+    },
+    {
+      "word": "get",
+      "start": 43.38,
+      "end": 43.54
+    },
+    {
+      "word": "your",
+      "start": 43.54,
+      "end": 43.68
+    },
+    {
+      "word": "hemmy",
+      "start": 43.68,
+      "end": 43.98
+    },
+    {
+      "word": "downs",
+      "start": 43.98,
+      "end": 44.26
+    },
+    {
+      "word": "and",
+      "start": 44.26,
+      "end": 44.6
+    },
+    {
+      "word": "party",
+      "start": 44.6,
+      "end": 44.84
+    }
+  ]
+}

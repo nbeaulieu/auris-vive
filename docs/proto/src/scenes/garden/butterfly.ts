@@ -6,10 +6,18 @@ import { remapPitch, lerp, hsl } from '../../utils';
  * Color from pitch (violet→gold), figure-8 flight, wings fold when unvoiced.
  */
 export class ButterflyOrganism {
+  opacity = 1;
+  frozen = false;
   private phase = 0;
   private wingSpread = 0;
 
   render(frame: StemFrame, ctx: CanvasRenderingContext2D, w: number, h: number, elapsed: number): void {
+    const isSilent = frame.energy < 0.05;
+    this.opacity += isSilent ? -0.033 : 0.05;
+    this.opacity = Math.max(0, Math.min(1, this.opacity));
+    if (isSilent && this.opacity < 0.01) { this.frozen = true; return; }
+    this.frozen = false;
+
     const voiced = frame.pitch_curve > 0;
 
     // Figure-8 flight path (Lissajous)
@@ -34,6 +42,7 @@ export class ButterflyOrganism {
     const wingAngle = this.wingSpread * Math.PI * 0.45;
 
     ctx.save();
+    ctx.globalAlpha = this.opacity;
     ctx.translate(cx, cy);
     ctx.scale(3, 3);
 

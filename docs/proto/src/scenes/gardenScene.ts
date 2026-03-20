@@ -2,7 +2,7 @@ import type { StemName, StemFrame } from '../types';
 import { Scene } from './base';
 import { hexToRgba } from '../utils';
 import { FrogOrganism } from './garden/frog';
-import { SnailOrganism } from './garden/snail';
+import { MushroomsOrganism } from './garden/mushrooms';
 import { ButterflyOrganism } from './garden/butterfly';
 import { BeesOrganism } from './garden/bees';
 import { DaffodilOrganism } from './garden/daffodil';
@@ -14,7 +14,7 @@ interface Firefly { x: number; y: number; }
 
 export class GardenScene extends Scene {
   private frog = new FrogOrganism();
-  private snail = new SnailOrganism();
+  private mushrooms = new MushroomsOrganism();
   private butterfly = new ButterflyOrganism();
   private bees = new BeesOrganism();
   private daffodil = new DaffodilOrganism();
@@ -27,7 +27,6 @@ export class GardenScene extends Scene {
   unmount(): void {}
 
   private init(w: number, h: number): void {
-    // Seed fireflies at random positions in the upper two-thirds
     this.fireflies = Array.from({ length: 5 }, () => ({
       x: Math.random() * w,
       y: Math.random() * h * 0.65,
@@ -41,6 +40,7 @@ export class GardenScene extends Scene {
     width: number,
     height: number,
     elapsed: number,
+    stemEnabled: Record<StemName, boolean>,
   ): void {
     if (!this.inited) this.init(width, height);
 
@@ -97,12 +97,12 @@ export class GardenScene extends Scene {
       ctx.fill();
     });
 
-    // ── Organisms (back to front) ───────────────────────────────────────
-    this.daffodil.render(frames.piano, ctx, width, height, elapsed);
-    this.snail.render(frames.bass, ctx, width, height);
-    this.frog.render(frames.drums, ctx, width, height);
-    this.bees.render(frames.other, ctx, width, height, elapsed);
-    this.dragonfly.render(frames.guitar, ctx, width, height, elapsed);
-    this.butterfly.render(frames.vocals, ctx, width, height, elapsed);
+    // ── Organisms (back to front, respecting stemEnabled) ───────────────
+    if (stemEnabled.bass)   this.mushrooms.render(frames.bass, ctx, width, height, elapsed);
+    if (stemEnabled.piano)  this.daffodil.render(frames.piano, ctx, width, height, elapsed);
+    if (stemEnabled.drums)  this.frog.render(frames.drums, ctx, width, height);
+    if (stemEnabled.other)  this.bees.render(frames.other, ctx, width, height, elapsed);
+    if (stemEnabled.guitar) this.dragonfly.render(frames.guitar, ctx, width, height, elapsed);
+    if (stemEnabled.vocals) this.butterfly.render(frames.vocals, ctx, width, height, elapsed);
   }
 }

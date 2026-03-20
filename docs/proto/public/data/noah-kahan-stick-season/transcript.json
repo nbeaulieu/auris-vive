@@ -1,0 +1,546 @@
+{
+  "slug": "noah-kahan-stick-season",
+  "language": "en",
+  "words": [
+    {
+      "word": "to",
+      "start": 0.0,
+      "end": 0.08
+    },
+    {
+      "word": "see",
+      "start": 0.08,
+      "end": 0.34
+    },
+    {
+      "word": "the",
+      "start": 0.34,
+      "end": 0.58
+    },
+    {
+      "word": "other",
+      "start": 0.58,
+      "end": 0.74
+    },
+    {
+      "word": "sticks",
+      "start": 0.74,
+      "end": 1.32
+    },
+    {
+      "word": "and",
+      "start": 1.32,
+      "end": 1.54
+    },
+    {
+      "word": "I",
+      "start": 1.54,
+      "end": 1.98
+    },
+    {
+      "word": "soccer",
+      "start": 1.98,
+      "end": 2.98
+    },
+    {
+      "word": "mom",
+      "start": 2.98,
+      "end": 3.7
+    },
+    {
+      "word": "she",
+      "start": 3.7,
+      "end": 3.96
+    },
+    {
+      "word": "forgot",
+      "start": 3.96,
+      "end": 4.42
+    },
+    {
+      "word": "that",
+      "start": 4.42,
+      "end": 4.72
+    },
+    {
+      "word": "I",
+      "start": 4.72,
+      "end": 4.86
+    },
+    {
+      "word": "exist",
+      "start": 4.86,
+      "end": 5.24
+    },
+    {
+      "word": "didn't",
+      "start": 5.24,
+      "end": 6.02
+    },
+    {
+      "word": "it",
+      "start": 6.02,
+      "end": 6.34
+    },
+    {
+      "word": "half",
+      "start": 6.34,
+      "end": 6.9
+    },
+    {
+      "word": "my",
+      "start": 6.9,
+      "end": 7.22
+    },
+    {
+      "word": "fault",
+      "start": 7.22,
+      "end": 7.64
+    },
+    {
+      "word": "but",
+      "start": 7.64,
+      "end": 7.98
+    },
+    {
+      "word": "I",
+      "start": 7.98,
+      "end": 8.1
+    },
+    {
+      "word": "just",
+      "start": 8.1,
+      "end": 8.28
+    },
+    {
+      "word": "like",
+      "start": 8.28,
+      "end": 8.56
+    },
+    {
+      "word": "to",
+      "start": 8.56,
+      "end": 8.72
+    },
+    {
+      "word": "play",
+      "start": 8.72,
+      "end": 8.9
+    },
+    {
+      "word": "the",
+      "start": 8.9,
+      "end": 9.04
+    },
+    {
+      "word": "victim",
+      "start": 9.04,
+      "end": 9.4
+    },
+    {
+      "word": "I'll",
+      "start": 9.4,
+      "end": 9.68
+    },
+    {
+      "word": "drink",
+      "start": 9.68,
+      "end": 10.0
+    },
+    {
+      "word": "alcohol",
+      "start": 10.8,
+      "end": 11.52
+    },
+    {
+      "word": "till",
+      "start": 11.52,
+      "end": 12.1
+    },
+    {
+      "word": "my",
+      "start": 12.1,
+      "end": 12.36
+    },
+    {
+      "word": "friends",
+      "start": 12.36,
+      "end": 12.66
+    },
+    {
+      "word": "come",
+      "start": 12.66,
+      "end": 12.84
+    },
+    {
+      "word": "home",
+      "start": 12.84,
+      "end": 13.12
+    },
+    {
+      "word": "for",
+      "start": 13.12,
+      "end": 13.3
+    },
+    {
+      "word": "Christmas",
+      "start": 13.3,
+      "end": 13.72
+    },
+    {
+      "word": "and",
+      "start": 13.72,
+      "end": 14.14
+    },
+    {
+      "word": "I'll",
+      "start": 14.14,
+      "end": 14.46
+    },
+    {
+      "word": "dream",
+      "start": 14.46,
+      "end": 15.06
+    },
+    {
+      "word": "each",
+      "start": 15.06,
+      "end": 15.48
+    },
+    {
+      "word": "night",
+      "start": 15.48,
+      "end": 15.78
+    },
+    {
+      "word": "of",
+      "start": 15.78,
+      "end": 16.08
+    },
+    {
+      "word": "some",
+      "start": 16.08,
+      "end": 16.6
+    },
+    {
+      "word": "hurting",
+      "start": 16.6,
+      "end": 17.3
+    },
+    {
+      "word": "you",
+      "start": 17.3,
+      "end": 17.82
+    },
+    {
+      "word": "that",
+      "start": 17.82,
+      "end": 18.22
+    },
+    {
+      "word": "I",
+      "start": 18.22,
+      "end": 18.48
+    },
+    {
+      "word": "might",
+      "start": 18.48,
+      "end": 19.04
+    },
+    {
+      "word": "not",
+      "start": 19.04,
+      "end": 19.48
+    },
+    {
+      "word": "have",
+      "start": 19.48,
+      "end": 20.02
+    },
+    {
+      "word": "but",
+      "start": 20.02,
+      "end": 20.26
+    },
+    {
+      "word": "I",
+      "start": 20.26,
+      "end": 20.58
+    },
+    {
+      "word": "didn't",
+      "start": 20.58,
+      "end": 21.32
+    },
+    {
+      "word": "lose",
+      "start": 21.32,
+      "end": 21.78
+    },
+    {
+      "word": "now",
+      "start": 21.78,
+      "end": 22.32
+    },
+    {
+      "word": "your",
+      "start": 22.32,
+      "end": 22.68
+    },
+    {
+      "word": "tire",
+      "start": 22.68,
+      "end": 23.3
+    },
+    {
+      "word": "tracks",
+      "start": 23.3,
+      "end": 24.0
+    },
+    {
+      "word": "and",
+      "start": 24.0,
+      "end": 24.34
+    },
+    {
+      "word": "one",
+      "start": 24.34,
+      "end": 24.6
+    },
+    {
+      "word": "pair",
+      "start": 24.6,
+      "end": 25.18
+    },
+    {
+      "word": "of",
+      "start": 25.18,
+      "end": 25.56
+    },
+    {
+      "word": "shoes",
+      "start": 25.56,
+      "end": 25.92
+    },
+    {
+      "word": "and",
+      "start": 25.92,
+      "end": 26.32
+    },
+    {
+      "word": "I'm",
+      "start": 26.32,
+      "end": 26.9
+    },
+    {
+      "word": "slaining",
+      "start": 26.9,
+      "end": 27.54
+    },
+    {
+      "word": "half",
+      "start": 27.54,
+      "end": 28.02
+    },
+    {
+      "word": "a",
+      "start": 28.02,
+      "end": 28.3
+    },
+    {
+      "word": "dot",
+      "start": 28.3,
+      "end": 28.4
+    },
+    {
+      "word": "I",
+      "start": 28.4,
+      "end": 28.46
+    },
+    {
+      "word": "don't",
+      "start": 28.46,
+      "end": 28.82
+    },
+    {
+      "word": "have",
+      "start": 28.82,
+      "end": 29.22
+    },
+    {
+      "word": "to",
+      "start": 29.22,
+      "end": 29.6
+    },
+    {
+      "word": "do",
+      "start": 29.6,
+      "end": 30.06
+    },
+    {
+      "word": "so",
+      "start": 34.12,
+      "end": 34.46
+    },
+    {
+      "word": "I",
+      "start": 34.46,
+      "end": 34.62
+    },
+    {
+      "word": "thought",
+      "start": 34.62,
+      "end": 35.06
+    },
+    {
+      "word": "that",
+      "start": 35.06,
+      "end": 35.26
+    },
+    {
+      "word": "if",
+      "start": 35.26,
+      "end": 35.5
+    },
+    {
+      "word": "I",
+      "start": 35.5,
+      "end": 35.7
+    },
+    {
+      "word": "piled",
+      "start": 35.7,
+      "end": 36.26
+    },
+    {
+      "word": "something",
+      "start": 36.26,
+      "end": 36.54
+    },
+    {
+      "word": "good",
+      "start": 36.54,
+      "end": 36.94
+    },
+    {
+      "word": "in",
+      "start": 36.94,
+      "end": 37.2
+    },
+    {
+      "word": "all",
+      "start": 37.2,
+      "end": 37.5
+    },
+    {
+      "word": "my",
+      "start": 37.5,
+      "end": 37.8
+    },
+    {
+      "word": "bad",
+      "start": 37.8,
+      "end": 38.18
+    },
+    {
+      "word": "that",
+      "start": 38.18,
+      "end": 38.46
+    },
+    {
+      "word": "I",
+      "start": 38.46,
+      "end": 38.58
+    },
+    {
+      "word": "could",
+      "start": 38.58,
+      "end": 38.78
+    },
+    {
+      "word": "cancel",
+      "start": 38.78,
+      "end": 39.24
+    },
+    {
+      "word": "about",
+      "start": 39.24,
+      "end": 39.48
+    },
+    {
+      "word": "the",
+      "start": 39.48,
+      "end": 39.62
+    },
+    {
+      "word": "dark",
+      "start": 39.62,
+      "end": 40.08
+    },
+    {
+      "word": "this",
+      "start": 40.08,
+      "end": 40.32
+    },
+    {
+      "word": "I",
+      "start": 40.32,
+      "end": 40.66
+    },
+    {
+      "word": "inherited",
+      "start": 40.66,
+      "end": 41.1
+    },
+    {
+      "word": "from",
+      "start": 41.1,
+      "end": 41.58
+    },
+    {
+      "word": "dad",
+      "start": 41.58,
+      "end": 42.14
+    },
+    {
+      "word": "no",
+      "start": 42.14,
+      "end": 42.48
+    },
+    {
+      "word": "I",
+      "start": 42.48,
+      "end": 42.68
+    },
+    {
+      "word": "am",
+      "start": 42.68,
+      "end": 42.96
+    },
+    {
+      "word": "no",
+      "start": 42.96,
+      "end": 43.38
+    },
+    {
+      "word": "longer",
+      "start": 43.38,
+      "end": 43.76
+    },
+    {
+      "word": "funny",
+      "start": 43.76,
+      "end": 44.18
+    },
+    {
+      "word": "cuz",
+      "start": 44.18,
+      "end": 44.6
+    },
+    {
+      "word": "I",
+      "start": 44.6,
+      "end": 44.82
+    }
+  ]
+}

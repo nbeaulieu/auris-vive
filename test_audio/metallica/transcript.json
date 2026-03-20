@@ -1,0 +1,231 @@
+{
+  "slug": "metallica",
+  "language": "en",
+  "words": [
+    {
+      "word": "With",
+      "start": 0.0,
+      "end": 0.24
+    },
+    {
+      "word": "one",
+      "start": 0.24,
+      "end": 0.76
+    },
+    {
+      "word": "eye",
+      "start": 0.76,
+      "end": 1.22
+    },
+    {
+      "word": "on",
+      "start": 1.22,
+      "end": 1.72
+    },
+    {
+      "word": "bear,",
+      "start": 1.72,
+      "end": 2.4
+    },
+    {
+      "word": "With",
+      "start": 3.22,
+      "end": 3.68
+    },
+    {
+      "word": "a",
+      "start": 3.68,
+      "end": 3.88
+    },
+    {
+      "word": "thing",
+      "start": 3.88,
+      "end": 3.92
+    },
+    {
+      "word": "of",
+      "start": 3.92,
+      "end": 4.18
+    },
+    {
+      "word": "pillow",
+      "start": 4.18,
+      "end": 4.74
+    },
+    {
+      "word": "tight,",
+      "start": 4.74,
+      "end": 5.64
+    },
+    {
+      "word": "Exit",
+      "start": 6.46,
+      "end": 7.56
+    },
+    {
+      "word": "light,",
+      "start": 7.56,
+      "end": 8.66
+    },
+    {
+      "word": "And",
+      "start": 10.28,
+      "end": 11.02
+    },
+    {
+      "word": "the",
+      "start": 11.02,
+      "end": 11.56
+    },
+    {
+      "word": "night,",
+      "start": 11.56,
+      "end": 12.36
+    },
+    {
+      "word": "Take",
+      "start": 14.04,
+      "end": 14.56
+    },
+    {
+      "word": "my",
+      "start": 14.56,
+      "end": 15.52
+    },
+    {
+      "word": "hand,",
+      "start": 15.52,
+      "end": 16.84
+    },
+    {
+      "word": "Rock",
+      "start": 17.76,
+      "end": 18.08
+    },
+    {
+      "word": "to",
+      "start": 18.08,
+      "end": 18.28
+    },
+    {
+      "word": "never,",
+      "start": 18.28,
+      "end": 18.68
+    },
+    {
+      "word": "never",
+      "start": 18.86,
+      "end": 19.2
+    },
+    {
+      "word": "lay",
+      "start": 19.2,
+      "end": 19.64
+    },
+    {
+      "word": "on",
+      "start": 19.64,
+      "end": 20.12
+    },
+    {
+      "word": "God.",
+      "start": 20.12,
+      "end": 20.26
+    },
+    {
+      "word": "Something's",
+      "start": 35.82,
+      "end": 36.34
+    },
+    {
+      "word": "wrong,",
+      "start": 36.34,
+      "end": 36.54
+    },
+    {
+      "word": "something",
+      "start": 36.82,
+      "end": 37.08
+    },
+    {
+      "word": "like,",
+      "start": 37.08,
+      "end": 37.44
+    },
+    {
+      "word": "Hear",
+      "start": 37.7,
+      "end": 37.92
+    },
+    {
+      "word": "me,",
+      "start": 37.92,
+      "end": 38.12
+    },
+    {
+      "word": "that's",
+      "start": 38.14,
+      "end": 38.54
+    },
+    {
+      "word": "tonight,",
+      "start": 38.54,
+      "end": 39.1
+    },
+    {
+      "word": "And",
+      "start": 39.72,
+      "end": 39.88
+    },
+    {
+      "word": "the",
+      "start": 39.88,
+      "end": 40.14
+    },
+    {
+      "word": "olives,",
+      "start": 40.14,
+      "end": 40.44
+    },
+    {
+      "word": "the",
+      "start": 40.66,
+      "end": 40.76
+    },
+    {
+      "word": "white,",
+      "start": 40.76,
+      "end": 41.32
+    },
+    {
+      "word": "Change",
+      "start": 43.14,
+      "end": 43.66
+    },
+    {
+      "word": "the",
+      "start": 43.66,
+      "end": 43.9
+    },
+    {
+      "word": "world,",
+      "start": 43.9,
+      "end": 44.24
+    },
+    {
+      "word": "change",
+      "start": 44.52,
+      "end": 44.64
+    },
+    {
+      "word": "the",
+      "start": 44.64,
+      "end": 44.88
+    },
+    {
+      "word": "world.",
+      "start": 44.88,
+      "end": 44.98
+    }
+  ]
+}

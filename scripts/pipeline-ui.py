@@ -77,20 +77,23 @@ def song_table(songs: list[dict]) -> Table:
     table.add_column("clip",   style="dim", width=6)
     table.add_column("stems",  style="dim", width=6)
     table.add_column("curves", style="dim", width=7)
+    table.add_column("cc",     style="dim", width=4)
     table.add_column("notes",  style="italic #8a8a8a")
 
     for i, song in enumerate(songs, 1):
-        clip_path   = REPO_ROOT / "test_audio" / song["slug"] / "clip.wav"
-        stems_path  = REPO_ROOT / "test_audio" / song["slug"] / "stems"
-        curves_path = REPO_ROOT / "test_audio" / song["slug"] / "curves"
+        clip_path       = REPO_ROOT / "test_audio" / song["slug"] / "clip.wav"
+        stems_path      = REPO_ROOT / "test_audio" / song["slug"] / "stems"
+        curves_path     = REPO_ROOT / "test_audio" / song["slug"] / "curves"
+        transcript_path = REPO_ROOT / "test_audio" / song["slug"] / "transcript.json"
         table.add_row(
             str(i),
             song["name"],
             song["start"],
             str(song["duration"]) + "s",
-            "✓" if clip_path.exists()   else "·",
-            "✓" if stems_path.exists()  else "·",
-            "✓" if curves_path.exists() else "·",
+            "✓" if clip_path.exists()       else "·",
+            "✓" if stems_path.exists()      else "·",
+            "✓" if curves_path.exists()     else "·",
+            "✓" if transcript_path.exists() else "·",
             song["notes"],
         )
     return table
@@ -145,6 +148,19 @@ def run_analyse(song: dict):
         console.print("[#A084C8]✓ curves written[/#A084C8]")
 
 
+def run_transcribe(song: dict):
+    vocals_path = REPO_ROOT / "test_audio" / song["slug"] / "stems" / "vocals.flac"
+    if not vocals_path.exists():
+        console.print("[red]✗ no vocals stem — run stems first[/red]")
+        return
+    console.print(f"\n[#C9A96E]▸[/#C9A96E] transcribing vocals: [bold]{song['name']}[/bold]")
+    rc = run_command([str(REPO_ROOT / "scripts" / "transcribe-vocals.sh"), song["slug"]])
+    if rc != 0:
+        console.print("[red]✗ transcription failed[/red]")
+    else:
+        console.print("[#A084C8]✓ transcript written[/#A084C8]")
+
+
 def export_curves(song: dict):
     curves_dir = REPO_ROOT / "test_audio" / song["slug"] / "curves"
     if not curves_dir.exists():
@@ -192,9 +208,10 @@ def main():
         console.print("  [#C9A96E]f[/#C9A96E]  force re-stem  "
                       "[#C9A96E]n[/#C9A96E]  analyse one    "
                       "[#C9A96E]p[/#C9A96E]  analyse all")
-        console.print("  [#C9A96E]c[/#C9A96E]  export curves  "
-                      "[#C9A96E]a[/#C9A96E]  add song       "
-                      "[#C9A96E]r[/#C9A96E]  run all        "
+        console.print("  [#C9A96E]t[/#C9A96E]  transcribe CC  "
+                      "[#C9A96E]c[/#C9A96E]  export curves  "
+                      "[#C9A96E]a[/#C9A96E]  add song")
+        console.print("  [#C9A96E]r[/#C9A96E]  run all        "
                       "[#C9A96E]q[/#C9A96E]  quit")
         console.print()
 
@@ -218,6 +235,7 @@ def main():
                 grab_clip(song)
                 run_stems(song)
                 run_analyse(song)
+                run_transcribe(song)
                 export_curves(song)
             console.rule("[#A084C8]all done[/#A084C8]")
 
@@ -240,7 +258,7 @@ def main():
             else:
                 console.print("[#A084C8]✓ exported to docs/proto/data/[/#A084C8]")
 
-        elif action in ("g", "s", "b", "f", "n"):
+        elif action in ("g", "s", "b", "f", "n", "t"):
             console.print()
             console.print(song_table(songs))
             idx = Prompt.ask("  song number").strip()
@@ -258,6 +276,8 @@ def main():
                 run_stems(song, force=True)
             if action == "n":
                 run_analyse(song)
+            if action == "t":
+                run_transcribe(song)
 
         else:
             console.print("[dim]unknown action[/dim]")

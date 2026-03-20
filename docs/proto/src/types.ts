@@ -11,9 +11,10 @@ export interface StemFrame {
 }
 
 export interface CurvesData {
-  slug:       string;
-  duration_s: number;
-  frame_rate: number;
-  n_frames:   number;
-  stems:      Record<StemName, Record<keyof StemFrame, number[]>>;
+  slug:             string;
+  duration_s:       number;
+  frame_rate:       number;
+  n_frames:         number;
+  stems:            Record<StemName, Record<keyof StemFrame, number[]>>;
+  stems_available?: boolean;
 }

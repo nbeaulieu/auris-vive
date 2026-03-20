@@ -1,13 +1,17 @@
-import type { CurvesData } from './types';
+import type { CurvesData, StemName } from './types';
 import { AudioEngine } from './audio';
 import { CurvePlayer } from './curvePlayer';
 import { SceneManager } from './sceneManager';
 import { WaveScene } from './scenes/waveScene';
 import { GardenScene } from './scenes/gardenScene';
+import { CCOverlay } from './ccOverlay';
+
+const STEM_NAMES: StemName[] = ['drums', 'bass', 'vocals', 'other', 'piano', 'guitar'];
 
 let audio: AudioEngine;
 let curvePlayer: CurvePlayer | null = null;
 let sceneManager: SceneManager | null = null;
+let ccOverlay: CCOverlay | null = null;
 let startTime = 0;
 
 const canvas  = document.getElementById('canvas') as HTMLCanvasElement;
@@ -45,22 +49,37 @@ async function loadSong(slug: string): Promise<void> {
   }
   const curvesData = await curvesResp.json() as CurvesData;
 
-  await audio.load(`data/${slug}/audio.mp3`);
+  // Load stems if available, otherwise fall back to mix
+  if (curvesData.stems_available) {
+    await audio.loadStems(`data/${slug}/stems`, STEM_NAMES);
+    // If stem loading failed, loadStems falls back internally — load mix as backup
+    if (audio.mode !== 'stems') {
+      await audio.load(`data/${slug}/audio.mp3`);
+    }
+  } else {
+    await audio.load(`data/${slug}/audio.mp3`);
+  }
 
   curvePlayer = new CurvePlayer(curvesData);
 
-  // Create scene manager on first load
   if (!sceneManager) {
     sceneManager = new SceneManager(canvas, [
       new WaveScene(),
       new GardenScene(),
-    ]);
+    ], (stem, enabled) => {
+      audio.setStemGain(stem, enabled ? 1 : 0);
+    });
   }
+
+  if (!ccOverlay) {
+    ccOverlay = new CCOverlay();
+  }
+  await ccOverlay.load(`data/${slug}/transcript.json`);
 
   startTime = 0;
   playBtn.disabled = false;
   playBtn.textContent = '▶ Play';
-  status.textContent = curvesData.slug;
+  status.textContent = `${curvesData.slug}${audio.mode === 'stems' ? ' [stems]' : ''}`;
 }
 
 function tick(): void {
@@ -69,6 +88,7 @@ function tick(): void {
     const frames = curvePlayer.frameAt(t);
     const elapsed = audio.playing ? t : startTime;
     sceneManager.render(frames, elapsed);
+    ccOverlay?.update(t);
   }
   requestAnimationFrame(tick);
 }

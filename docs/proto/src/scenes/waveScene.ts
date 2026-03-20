@@ -16,6 +16,7 @@ export class WaveScene extends Scene {
     width: number,
     height: number,
     elapsed: number,
+    stemEnabled: Record<StemName, boolean>,
   ): void {
     ctx.fillStyle = BACKGROUND;
     ctx.fillRect(0, 0, width, height);
@@ -23,6 +24,7 @@ export class WaveScene extends Scene {
     const laneHeight = height / STEM_ORDER.length;
 
     STEM_ORDER.forEach((stemName, i) => {
+      if (!stemEnabled[stemName]) return;
       const frame = frames[stemName];
       if (!frame) return;
 

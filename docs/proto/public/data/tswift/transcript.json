@@ -1,0 +1,606 @@
+{
+  "slug": "tswift",
+  "language": "en",
+  "words": [
+    {
+      "word": "I'm",
+      "start": 0.78,
+      "end": 1.34
+    },
+    {
+      "word": "alone",
+      "start": 1.34,
+      "end": 1.5
+    },
+    {
+      "word": "in",
+      "start": 1.5,
+      "end": 1.74
+    },
+    {
+      "word": "my",
+      "start": 1.74,
+      "end": 1.9
+    },
+    {
+      "word": "tower,",
+      "start": 1.9,
+      "end": 2.24
+    },
+    {
+      "word": "you",
+      "start": 2.72,
+      "end": 2.72
+    },
+    {
+      "word": "were",
+      "start": 2.72,
+      "end": 2.92
+    },
+    {
+      "word": "just",
+      "start": 2.92,
+      "end": 3.16
+    },
+    {
+      "word": "torn",
+      "start": 3.16,
+      "end": 3.44
+    },
+    {
+      "word": "in",
+      "start": 3.44,
+      "end": 3.7
+    },
+    {
+      "word": "your",
+      "start": 3.7,
+      "end": 3.9
+    },
+    {
+      "word": "powers",
+      "start": 3.9,
+      "end": 4.32
+    },
+    {
+      "word": "Now",
+      "start": 4.32,
+      "end": 4.62
+    },
+    {
+      "word": "I",
+      "start": 4.62,
+      "end": 4.84
+    },
+    {
+      "word": "can",
+      "start": 4.84,
+      "end": 5.06
+    },
+    {
+      "word": "see",
+      "start": 5.06,
+      "end": 5.36
+    },
+    {
+      "word": "it",
+      "start": 5.36,
+      "end": 5.94
+    },
+    {
+      "word": "all",
+      "start": 5.94,
+      "end": 7.16
+    },
+    {
+      "word": "They",
+      "start": 7.16,
+      "end": 7.44
+    },
+    {
+      "word": "won't",
+      "start": 7.44,
+      "end": 7.76
+    },
+    {
+      "word": "let",
+      "start": 7.76,
+      "end": 7.76
+    },
+    {
+      "word": "me",
+      "start": 7.76,
+      "end": 7.76
+    },
+    {
+      "word": "go,",
+      "start": 7.76,
+      "end": 8.2
+    },
+    {
+      "word": "they",
+      "start": 8.46,
+      "end": 9.28
+    },
+    {
+      "word": "won't",
+      "start": 9.28,
+      "end": 10.22
+    },
+    {
+      "word": "let",
+      "start": 10.22,
+      "end": 10.22
+    },
+    {
+      "word": "me",
+      "start": 10.22,
+      "end": 10.28
+    },
+    {
+      "word": "go",
+      "start": 10.28,
+      "end": 10.28
+    },
+    {
+      "word": "You",
+      "start": 10.28,
+      "end": 10.38
+    },
+    {
+      "word": "took",
+      "start": 10.38,
+      "end": 10.64
+    },
+    {
+      "word": "me",
+      "start": 10.64,
+      "end": 10.92
+    },
+    {
+      "word": "out",
+      "start": 10.92,
+      "end": 11.26
+    },
+    {
+      "word": "of",
+      "start": 11.26,
+      "end": 11.4
+    },
+    {
+      "word": "my",
+      "start": 11.4,
+      "end": 11.6
+    },
+    {
+      "word": "grave",
+      "start": 11.6,
+      "end": 11.88
+    },
+    {
+      "word": "and",
+      "start": 11.88,
+      "end": 12.22
+    },
+    {
+      "word": "saved",
+      "start": 12.22,
+      "end": 12.6
+    },
+    {
+      "word": "my",
+      "start": 12.6,
+      "end": 12.88
+    },
+    {
+      "word": "heart",
+      "start": 12.88,
+      "end": 13.1
+    },
+    {
+      "word": "from",
+      "start": 13.1,
+      "end": 13.36
+    },
+    {
+      "word": "the",
+      "start": 13.36,
+      "end": 13.56
+    },
+    {
+      "word": "fate",
+      "start": 13.56,
+      "end": 13.88
+    },
+    {
+      "word": "of",
+      "start": 13.88,
+      "end": 14.46
+    },
+    {
+      "word": "all",
+      "start": 14.46,
+      "end": 14.74
+    },
+    {
+      "word": "the",
+      "start": 14.74,
+      "end": 15.04
+    },
+    {
+      "word": "pain",
+      "start": 15.04,
+      "end": 15.26
+    },
+    {
+      "word": "in",
+      "start": 15.26,
+      "end": 15.4
+    },
+    {
+      "word": "the",
+      "start": 15.4,
+      "end": 15.58
+    },
+    {
+      "word": "old",
+      "start": 15.58,
+      "end": 16.38
+    },
+    {
+      "word": "Keep",
+      "start": 17.58,
+      "end": 18.14
+    },
+    {
+      "word": "one",
+      "start": 18.14,
+      "end": 18.62
+    },
+    {
+      "word": "hundred",
+      "start": 18.62,
+      "end": 19.06
+    },
+    {
+      "word": "on",
+      "start": 19.06,
+      "end": 19.38
+    },
+    {
+      "word": "the",
+      "start": 19.38,
+      "end": 19.62
+    },
+    {
+      "word": "land,",
+      "start": 19.62,
+      "end": 19.98
+    },
+    {
+      "word": "let",
+      "start": 19.98,
+      "end": 20.46
+    },
+    {
+      "word": "it",
+      "start": 20.46,
+      "end": 20.6
+    },
+    {
+      "word": "cease",
+      "start": 20.6,
+      "end": 21.1
+    },
+    {
+      "word": "It's",
+      "start": 21.1,
+      "end": 21.68
+    },
+    {
+      "word": "got",
+      "start": 21.68,
+      "end": 21.88
+    },
+    {
+      "word": "pledged",
+      "start": 21.88,
+      "end": 22.46
+    },
+    {
+      "word": "allegiance",
+      "start": 22.46,
+      "end": 22.9
+    },
+    {
+      "word": "to",
+      "start": 22.9,
+      "end": 23.28
+    },
+    {
+      "word": "your",
+      "start": 23.28,
+      "end": 23.48
+    },
+    {
+      "word": "hands,",
+      "start": 23.48,
+      "end": 24.06
+    },
+    {
+      "word": "you've",
+      "start": 24.38,
+      "end": 24.56
+    },
+    {
+      "word": "seen",
+      "start": 24.56,
+      "end": 24.78
+    },
+    {
+      "word": "Your",
+      "start": 24.78,
+      "end": 25.4
+    },
+    {
+      "word": "vibes",
+      "start": 25.4,
+      "end": 25.92
+    },
+    {
+      "word": "will",
+      "start": 25.92,
+      "end": 26.14
+    },
+    {
+      "word": "kill",
+      "start": 26.14,
+      "end": 26.38
+    },
+    {
+      "word": "and",
+      "start": 26.38,
+      "end": 26.76
+    },
+    {
+      "word": "I'll",
+      "start": 26.76,
+      "end": 27.18
+    },
+    {
+      "word": "help",
+      "start": 27.18,
+      "end": 27.2
+    },
+    {
+      "word": "you",
+      "start": 27.2,
+      "end": 27.36
+    },
+    {
+      "word": "It's",
+      "start": 27.36,
+      "end": 28.42
+    },
+    {
+      "word": "now,",
+      "start": 28.42,
+      "end": 28.66
+    },
+    {
+      "word": "now,",
+      "start": 28.96,
+      "end": 29.08
+    },
+    {
+      "word": "your",
+      "start": 29.3,
+      "end": 29.3
+    },
+    {
+      "word": "mind",
+      "start": 29.3,
+      "end": 29.64
+    },
+    {
+      "word": "stops",
+      "start": 29.64,
+      "end": 29.98
+    },
+    {
+      "word": "at",
+      "start": 29.98,
+      "end": 30.24
+    },
+    {
+      "word": "fear,",
+      "start": 30.24,
+      "end": 30.54
+    },
+    {
+      "word": "this",
+      "start": 30.6,
+      "end": 30.76
+    },
+    {
+      "word": "needs",
+      "start": 30.76,
+      "end": 31.04
+    },
+    {
+      "word": "a",
+      "start": 31.04,
+      "end": 31.22
+    },
+    {
+      "word": "snife",
+      "start": 31.22,
+      "end": 31.7
+    },
+    {
+      "word": "You've",
+      "start": 31.7,
+      "end": 32.08
+    },
+    {
+      "word": "been",
+      "start": 32.08,
+      "end": 32.2
+    },
+    {
+      "word": "cheating",
+      "start": 32.2,
+      "end": 32.62
+    },
+    {
+      "word": "in",
+      "start": 32.62,
+      "end": 33.06
+    },
+    {
+      "word": "all",
+      "start": 33.06,
+      "end": 33.62
+    },
+    {
+      "word": "They",
+      "start": 34.46,
+      "end": 34.78
+    },
+    {
+      "word": "say,",
+      "start": 34.78,
+      "end": 35.2
+    },
+    {
+      "word": "oh,",
+      "start": 35.54,
+      "end": 35.68
+    },
+    {
+      "word": "oh,",
+      "start": 35.96,
+      "end": 36.06
+    },
+    {
+      "word": "feel",
+      "start": 36.28,
+      "end": 36.4
+    },
+    {
+      "word": "you",
+      "start": 36.4,
+      "end": 36.74
+    },
+    {
+      "word": "It's",
+      "start": 36.74,
+      "end": 37.14
+    },
+    {
+      "word": "locked",
+      "start": 37.14,
+      "end": 37.3
+    },
+    {
+      "word": "inside",
+      "start": 37.3,
+      "end": 37.78
+    },
+    {
+      "word": "my",
+      "start": 37.78,
+      "end": 38.04
+    },
+    {
+      "word": "memory",
+      "start": 38.04,
+      "end": 38.54
+    },
+    {
+      "word": "and",
+      "start": 38.54,
+      "end": 39.0
+    },
+    {
+      "word": "only",
+      "start": 39.0,
+      "end": 39.38
+    },
+    {
+      "word": "you",
+      "start": 39.38,
+      "end": 39.7
+    },
+    {
+      "word": "possess",
+      "start": 39.7,
+      "end": 40.02
+    },
+    {
+      "word": "the",
+      "start": 40.02,
+      "end": 40.32
+    },
+    {
+      "word": "key",
+      "start": 40.32,
+      "end": 40.58
+    },
+    {
+      "word": "No",
+      "start": 40.58,
+      "end": 40.86
+    },
+    {
+      "word": "longer",
+      "start": 40.86,
+      "end": 41.22
+    },
+    {
+      "word": "drowning",
+      "start": 41.22,
+      "end": 41.8
+    },
+    {
+      "word": "and",
+      "start": 41.8,
+      "end": 42.18
+    },
+    {
+      "word": "deceived",
+      "start": 42.18,
+      "end": 42.62
+    },
+    {
+      "word": "All",
+      "start": 42.62,
+      "end": 43.1
+    },
+    {
+      "word": "because",
+      "start": 43.1,
+      "end": 43.5
+    },
+    {
+      "word": "you",
+      "start": 43.5,
+      "end": 43.76
+    },
+    {
+      "word": "came",
+      "start": 43.76,
+      "end": 44.02
+    },
+    {
+      "word": "for",
+      "start": 44.02,
+      "end": 44.24
+    },
+    {
+      "word": "me",
+      "start": 44.24,
+      "end": 44.6
+    }
+  ]
+}

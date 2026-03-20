@@ -13,6 +13,8 @@ interface Bee {
  * Swarm orbits a drifting centre. Scatter on onset.
  */
 export class BeesOrganism {
+  opacity = 1;
+  frozen = false;
   private bees: Bee[] = [];
   private swarmCx = 0;
   private swarmCy = 0;
@@ -35,12 +37,21 @@ export class BeesOrganism {
   render(frame: StemFrame, ctx: CanvasRenderingContext2D, w: number, h: number, _elapsed: number): void {
     if (!this.inited) this.init(w, h);
 
+    const isSilent = frame.energy < 0.05;
+    this.opacity += isSilent ? -0.033 : 0.05;
+    this.opacity = Math.max(0, Math.min(1, this.opacity));
+    if (isSilent && this.opacity < 0.01) { this.frozen = true; return; }
+    this.frozen = false;
+
     // Swarm centre drifts slowly
     this.swarmPhase += 0.005;
     const baseCx = w * 0.25 + Math.sin(this.swarmPhase) * w * 0.08;
     const baseCy = h * 0.22 + Math.cos(this.swarmPhase * 0.7) * h * 0.04;
     this.swarmCx += (baseCx - this.swarmCx) * 0.02;
     this.swarmCy += (baseCy - this.swarmCy) * 0.02;
+
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
 
     // Active bee count scales with energy
     const activeCount = Math.round(8 + frame.energy * 4);
@@ -90,5 +101,7 @@ export class BeesOrganism {
 
       ctx.restore();
     }
+
+    ctx.restore();
   }
 }

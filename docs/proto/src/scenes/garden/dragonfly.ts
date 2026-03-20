@@ -7,6 +7,8 @@ import { lerp } from '../../utils';
  * Trail on dart.
  */
 export class DragonflyOrganism {
+  opacity = 1;
+  frozen = false;
   private x = 0;
   private y = 0;
   private targetX = 0;
@@ -24,6 +26,12 @@ export class DragonflyOrganism {
 
   render(frame: StemFrame, ctx: CanvasRenderingContext2D, w: number, h: number, elapsed: number): void {
     if (!this.inited) this.init(w, h);
+
+    const isSilent = frame.energy < 0.05;
+    this.opacity += isSilent ? -0.033 : 0.05;
+    this.opacity = Math.max(0, Math.min(1, this.opacity));
+    if (isSilent && this.opacity < 0.01) { this.frozen = true; return; }
+    this.frozen = false;
 
     // Dart on guitar onset
     if (frame.onset > 0.3) {
@@ -50,11 +58,11 @@ export class DragonflyOrganism {
     // Draw trail
     for (const t of this.trail) {
       t.alpha *= 0.88;
-      ctx.globalAlpha = t.alpha;
+      ctx.globalAlpha = t.alpha * this.opacity;
       this.drawBody(ctx, t.x, t.y, frame.energy, elapsed);
     }
     this.trail = this.trail.filter(t => t.alpha > 0.02);
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha = this.opacity;
 
     // Draw dragonfly
     this.drawBody(ctx, this.x, this.y, frame.energy, elapsed);

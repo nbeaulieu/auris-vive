@@ -11,6 +11,7 @@ Reads every song in test_audio/songs.json that has curves on disk
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -85,12 +86,17 @@ def export_song(slug: str) -> bool:
 
     duration_s = round(n_frames / fps, 2)
 
+    # Check if stem audio files exist for multi-track playback
+    stems_dir = song_dir / "stems"
+    has_stem_audio = stems_dir.exists() and (stems_dir / "drums.flac").exists()
+
     bundle = {
         "slug": slug,
         "duration_s": duration_s,
         "frame_rate": float(fps),
         "n_frames": n_frames,
         "stems": stems,
+        "stems_available": has_stem_audio,
     }
 
     # Write output
@@ -108,6 +114,29 @@ def export_song(slug: str) -> bool:
         capture_output=True,
     )
     print(f"  WROTE {mp3_dest.relative_to(REPO_ROOT)}")
+
+    # Export stem MP3s for multi-track browser playback
+    if has_stem_audio:
+        stems_out = out_dir / "stems"
+        stems_out.mkdir(exist_ok=True)
+        for stem_name in STEM_NAMES:
+            flac_path = stems_dir / f"{stem_name}.flac"
+            mp3_path = stems_out / f"{stem_name}.mp3"
+            if flac_path.exists() and not mp3_path.exists():
+                subprocess.run(
+                    ["ffmpeg", "-y", "-i", str(flac_path),
+                     "-codec:a", "libmp3lame", "-qscale:a", "2",
+                     str(mp3_path)],
+                    check=True, capture_output=True,
+                )
+        print(f"  WROTE {stems_out.relative_to(REPO_ROOT)}/  (6 stems)")
+
+    # Copy transcript if available
+    transcript_src = song_dir / "transcript.json"
+    if transcript_src.exists():
+        transcript_dest = out_dir / "transcript.json"
+        shutil.copy2(transcript_src, transcript_dest)
+        print(f"  WROTE {transcript_dest.relative_to(REPO_ROOT)}")
 
     return True
 
