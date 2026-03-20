@@ -53,7 +53,7 @@ async function loadSong(slug: string): Promise<void> {
   }
   const curvesData = await curvesResp.json() as CurvesData;
 
-  await audio.load(`data/${slug}/audio.wav`);
+  await audio.load(`data/${slug}/audio.mp3`);
 
   curvePlayer = new CurvePlayer(curvesData);
 

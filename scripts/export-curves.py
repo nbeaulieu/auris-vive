@@ -5,13 +5,13 @@ Export pre-computed stem curves to JSON bundles for the web prototype.
 Reads every song in test_audio/songs.json that has curves on disk
 (test_audio/<slug>/curves/) and writes to docs/proto/data/<slug>/:
   - curves.json  — all curves, rounded to 2dp
-  - audio.wav    — copied from test_audio/<slug>/clip.wav
+  - audio.mp3    — converted from test_audio/<slug>/clip.wav via ffmpeg
 """
 
 from __future__ import annotations
 
 import json
-import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -101,9 +101,13 @@ def export_song(slug: str) -> bool:
     json_path.write_text(json.dumps(bundle))
     print(f"  WROTE {json_path.relative_to(REPO_ROOT)}  ({n_frames} frames, {duration_s}s)")
 
-    wav_dest = out_dir / "audio.wav"
-    shutil.copy2(clip_path, wav_dest)
-    print(f"  WROTE {wav_dest.relative_to(REPO_ROOT)}")
+    mp3_dest = out_dir / "audio.mp3"
+    subprocess.run(
+        ["ffmpeg", "-y", "-i", str(clip_path), "-b:a", "192k", str(mp3_dest)],
+        check=True,
+        capture_output=True,
+    )
+    print(f"  WROTE {mp3_dest.relative_to(REPO_ROOT)}")
 
     return True
 
