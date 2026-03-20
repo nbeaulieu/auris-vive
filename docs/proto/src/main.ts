@@ -1,15 +1,13 @@
-import type { CurvesData, StemName } from './types';
+import type { CurvesData } from './types';
 import { AudioEngine } from './audio';
 import { CurvePlayer } from './curvePlayer';
-import { CanvasRenderer } from './renderer';
-import { WaveRenderer } from './renderers/wave';
-import { STEM_COLOURS } from './palette';
-
-const STEM_ORDER: StemName[] = ['drums', 'bass', 'vocals', 'other', 'piano', 'guitar'];
+import { SceneManager } from './sceneManager';
+import { WaveScene } from './scenes/waveScene';
+import { GardenScene } from './scenes/gardenScene';
 
 let audio: AudioEngine;
 let curvePlayer: CurvePlayer | null = null;
-let canvasRenderer: CanvasRenderer | null = null;
+let sceneManager: SceneManager | null = null;
 let startTime = 0;
 
 const canvas  = document.getElementById('canvas') as HTMLCanvasElement;
@@ -25,17 +23,12 @@ function resizeCanvas(): void {
 }
 
 async function discoverSlugs(): Promise<string[]> {
-  // Discover available songs by fetching a manifest or trying known slugs.
-  // We'll try to fetch an index file first; if absent, fall back to songs.json slugs.
   try {
     const resp = await fetch('data/index.json');
     if (resp.ok) {
       return await resp.json() as string[];
     }
   } catch { /* fall through */ }
-
-  // Fallback: try known slugs from the select options already in HTML
-  // This path won't be hit in practice — export-curves.py writes index.json
   return [];
 }
 
@@ -43,7 +36,6 @@ async function loadSong(slug: string): Promise<void> {
   status.textContent = `Loading ${slug}…`;
   playBtn.disabled = true;
 
-  // Stop current playback
   if (audio?.playing) audio.pause();
 
   const curvesResp = await fetch(`data/${slug}/curves.json`);
@@ -57,10 +49,13 @@ async function loadSong(slug: string): Promise<void> {
 
   curvePlayer = new CurvePlayer(curvesData);
 
-  const renderers = STEM_ORDER.map(
-    stem => new WaveRenderer(stem, STEM_COLOURS[stem]),
-  );
-  canvasRenderer = new CanvasRenderer(canvas, renderers);
+  // Create scene manager on first load
+  if (!sceneManager) {
+    sceneManager = new SceneManager(canvas, [
+      new WaveScene(),
+      new GardenScene(),
+    ]);
+  }
 
   startTime = 0;
   playBtn.disabled = false;
@@ -69,11 +64,11 @@ async function loadSong(slug: string): Promise<void> {
 }
 
 function tick(): void {
-  if (curvePlayer && canvasRenderer) {
+  if (curvePlayer && sceneManager) {
     const t = audio.currentTime;
     const frames = curvePlayer.frameAt(t);
     const elapsed = audio.playing ? t : startTime;
-    canvasRenderer.render(frames, elapsed);
+    sceneManager.render(frames, elapsed);
   }
   requestAnimationFrame(tick);
 }
@@ -89,7 +84,6 @@ async function init(): Promise<void> {
     return;
   }
 
-  // Populate selector
   songSel.innerHTML = '';
   for (const slug of slugs) {
     const opt = document.createElement('option');
@@ -114,10 +108,7 @@ async function init(): Promise<void> {
     }
   });
 
-  // Load first song
   await loadSong(slugs[0]);
-
-  // Start render loop
   requestAnimationFrame(tick);
 }
 

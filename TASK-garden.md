@@ -87,11 +87,56 @@ Four elongated wings at 45° angles. Trail on dart.
 
 ### 5. Garden environment
 
-Draw in `gardenScene.ts` before rendering organisms:
-- Background: `#06060A`
-- Ground line at 70% canvas height: subtle horizontal rule,
-  `rgba(164, 132, 200, 0.08)`, 1px
-- No other environment elements in v1
+Draw in `gardenScene.ts` before rendering organisms. Layers in order
+(back to front):
+
+**Sky gradient:**
+```typescript
+const skyGrad = ctx.createLinearGradient(0, 0, 0, groundY);
+skyGrad.addColorStop(0, '#06060A');      // Void at top
+skyGrad.addColorStop(1, '#1A1428');      // Dusk at horizon
+ctx.fillStyle = skyGrad;
+ctx.fillRect(0, 0, canvas.width, groundY);
+```
+
+**Ground:**
+```typescript
+const groundGrad = ctx.createLinearGradient(0, groundY, 0, canvas.height);
+groundGrad.addColorStop(0, '#1A1428');   // Dusk at surface
+groundGrad.addColorStop(1, '#0E0B18');   // Deep at bottom
+ctx.fillStyle = groundGrad;
+ctx.fillRect(0, groundY, canvas.width, canvas.height - groundY);
+```
+
+**Atmospheric foliage (static):**
+3 soft elliptical blobs, `rgba(123, 94, 167, 0.04)` (Violet, nearly
+invisible), positioned at left/centre/right of the horizon. Large radii
+(200–400px), Gaussian-blurred feel via `shadowBlur`.
+
+**Ground line:**
+1px rule at `groundY`, `rgba(164, 132, 200, 0.08)`.
+
+**Fireflies (animated, music-independent):**
+5 small gold points (`#C9A96E`, radius 2px) drifting slowly on independent
+sine-wave paths. Opacity pulses gently between 0.3 and 0.9 at different
+phases. They exist in the background layer, drawn before organisms.
+
+```typescript
+fireflies.forEach((f, i) => {
+  f.x += Math.sin(elapsed * 0.3 + i) * 0.4;
+  f.y += Math.cos(elapsed * 0.2 + i * 1.3) * 0.3;
+  const opacity = 0.3 + 0.6 * (0.5 + 0.5 * Math.sin(elapsed * 0.7 + i * 2));
+  ctx.beginPath();
+  ctx.arc(f.x, f.y, 2, 0, Math.PI * 2);
+  ctx.fillStyle = hexToRgba('#C9A96E', opacity);
+  ctx.fill();
+});
+```
+
+**Organism size:**
+All organisms should be drawn at approximately 3x the size that feels
+natural for a small canvas. These are the stars of the scene — they
+should fill space and command attention.
 
 ### 6. Update `main.ts`
 

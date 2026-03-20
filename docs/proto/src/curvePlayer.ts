@@ -12,12 +12,13 @@ export class CurvePlayer {
     const result = {} as Record<StemName, StemFrame>;
     for (const [stemName, curves] of Object.entries(this.data.stems)) {
       result[stemName as StemName] = {
-        energy:     curves.energy[frame]     ?? 0,
-        brightness: curves.brightness[frame] ?? 0,
-        onset:      curves.onset[frame]      ?? 0,
-        warmth:     curves.warmth[frame]     ?? 0,
-        texture:    curves.texture[frame]    ?? 0,
-        flux:       curves.flux[frame]       ?? 0,
+        energy:      curves.energy[frame]      ?? 0,
+        brightness:  curves.brightness[frame]  ?? 0,
+        onset:       curves.onset[frame]       ?? 0,
+        warmth:      curves.warmth[frame]      ?? 0,
+        texture:     curves.texture[frame]     ?? 0,
+        flux:        curves.flux[frame]        ?? 0,
+        pitch_curve: curves.pitch_curve?.[frame] ?? 0,
       };
     }
     return result;
