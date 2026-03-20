@@ -41,9 +41,16 @@ auris-vive/
     └── pipeline/
         ├── ingest.py          ✅ implemented
         ├── separate.py        ✅ implemented
-        ├── transcribe.py      🔲 stub — YOUR TASK
-        ├── outputs.py         🔲 stub — YOUR TASK
+        ├── transcribe.py      ✅ implemented
+        ├── outputs.py         ✅ implemented
         ├── runner.py          ✅ implemented
+        ├── analyse/
+        │   ├── __init__.py    ✅ exports
+        │   ├── curves.py      ✅ StemCurves + AnalyseError
+        │   ├── analyse.py     ✅ analyse()
+        │   ├── source.py      ✅ CurvesSource ABC
+        │   ├── disk.py        ✅ DiskCurvesSource
+        │   └── memory.py      ✅ MemoryCurvesSource
         └── drums/
             ├── base.py        ✅ DrumTranscriber ABC
             ├── onset.py       ✅ OnsetTranscriber (v1)
@@ -183,6 +190,7 @@ Do not skip these updates. Stale documentation is a bug.
 | `src/pipeline/drums/` | ✅ Complete | OnsetTranscriber working |
 | `src/pipeline/transcribe.py` | ✅ Complete | 10 tests passing |
 | `src/pipeline/outputs.py` | ✅ Complete | 7 tests passing |
+| `src/pipeline/analyse/` | ✅ Complete | 12 tests passing |
 | `src/pipeline/runner.py` | ✅ Complete | wires all stages |
 | `src/api/` | 🔲 Stub | blocked on Q-API-1, do not touch |
 | `tests/pipeline/test_transcribe.py` | ✅ Complete | TC-TRX-001 through TC-TRX-009 |
