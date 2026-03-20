@@ -1,17 +1,17 @@
 Auris Vive — Stem Analysis Report
-Generated: 2026-03-19 22:52:28
+Generated: 2026-03-20 09:32:47
 Track:     acdc
-Source:    /Users/nicole/dev/auris-vive/test_audio/acdc/clip.wav
-Duration:  30.00s
-BPM:       90.7
+Source:    test_audio/acdc/clip.wav
+Duration:  45.00s
+BPM:       184.6
 Device:    mps
-Time:      27.9s
+Time:      49.5s
 
 stem            peak       rms   isolation  note
 --------------------------------------------------------------
-bass          0.5559    0.0634      0.3114  strong
-drums         0.9993    0.1169      0.5740  strong
-guitar        0.7529    0.1047      0.5143  strong
-other         0.7539    0.1054      0.5173  strong
-piano         0.0028    0.0001      0.0005  silent
-vocals        0.7257    0.0895      0.4394  strong
+bass          0.3675    0.0758      0.3521  strong
+drums         1.0111    0.1138      0.5285  strong
+guitar        0.7584    0.1105      0.5131  strong
+other         0.7609    0.1120      0.5201  strong
+piano         0.0025    0.0001      0.0006  silent
+vocals        0.7156    0.0960      0.4458  strong

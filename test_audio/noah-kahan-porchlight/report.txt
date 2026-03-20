@@ -1,0 +1,17 @@
+Auris Vive — Stem Analysis Report
+Generated: 2026-03-20 09:47:27
+Track:     noah-kahan-porchlight
+Source:    test_audio/noah-kahan-porchlight/clip.wav
+Duration:  45.00s
+BPM:       117.5
+Device:    mps
+Time:      52.7s
+
+stem            peak       rms   isolation  note
+--------------------------------------------------------------
+bass          0.1525    0.0145      0.0714  present
+drums         0.8081    0.0686      0.3386  strong
+guitar        0.3525    0.0323      0.1593  present
+other         0.7984    0.1092      0.5393  strong
+piano         0.5396    0.0355      0.1751  present
+vocals        0.8765    0.1428      0.7050  strong

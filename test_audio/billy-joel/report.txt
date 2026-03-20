@@ -1,17 +1,17 @@
 Auris Vive — Stem Analysis Report
-Generated: 2026-03-19 22:50:31
+Generated: 2026-03-20 09:26:36
 Track:     billy-joel
-Source:    /Users/nicole/dev/auris-vive/test_audio/billy-joel/clip.wav
-Duration:  30.00s
+Source:    test_audio/billy-joel/clip.wav
+Duration:  45.00s
 BPM:       178.2
 Device:    mps
-Time:      28.5s
+Time:      48.1s
 
 stem            peak       rms   isolation  note
 --------------------------------------------------------------
-bass          0.1829    0.0372      0.3967  strong
-drums         0.2314    0.0201      0.2143  present
-guitar        0.1489    0.0155      0.1654  present
-other         0.4020    0.0513      0.5470  strong
-piano         0.3331    0.0385      0.4098  strong
-vocals        0.4636    0.0577      0.6149  strong
+bass          0.1725    0.0351      0.3971  strong
+drums         0.2268    0.0199      0.2247  present
+guitar        0.1552    0.0135      0.1522  present
+other         0.4065    0.0468      0.5288  strong
+piano         0.3538    0.0347      0.3917  strong
+vocals        0.4628    0.0556      0.6282  strong

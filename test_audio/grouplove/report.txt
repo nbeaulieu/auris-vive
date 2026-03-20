@@ -1,0 +1,17 @@
+Auris Vive — Stem Analysis Report
+Generated: 2026-03-20 09:49:31
+Track:     grouplove
+Source:    test_audio/grouplove/clip.wav
+Duration:  45.00s
+BPM:       112.3
+Device:    mps
+Time:      47.5s
+
+stem            peak       rms   isolation  note
+--------------------------------------------------------------
+bass          0.1434    0.0105      0.1393  present
+drums         0.2729    0.0473      0.6276  strong
+guitar        0.1639    0.0225      0.2982  present
+other         0.1710    0.0272      0.3612  strong
+piano         0.0007    0.0001      0.0007  silent
+vocals        0.2015    0.0379      0.5032  strong

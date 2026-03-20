@@ -4,7 +4,7 @@
     "slug":     "tswift",
     "url":      "https://www.youtube.com/watch?v=ko70cExuzZM",
     "start":    "2:10",
-    "duration": 30,
+    "duration": 45,
     "notes":    "Strings + vocals. Piano stem near-silent (correct). Vocals excellent."
   },
   {
@@ -12,7 +12,7 @@
     "slug":     "billy-joel",
     "url":      "https://www.youtube.com/watch?v=gxEPV4kolz0",
     "start":    "1:25",
-    "duration": 30,
+    "duration": 45,
     "notes":    "Dense live mix. Piano stem noisy (harmonica bleed). Vocals stellar."
   },
   {
@@ -20,7 +20,7 @@
     "slug":     "crystal-method",
     "url":      "https://www.youtube.com/watch?v=bBG743nNry4",
     "start":    "3:00",
-    "duration": 30,
+    "duration": 45,
     "notes":    "Electronic. Testing how Demucs handles synth-heavy material."
   },
   {
@@ -28,7 +28,7 @@
     "slug":     "trombone-shorty",
     "url":      "https://www.youtube.com/watch?v=fNXWoQDMD_A",
     "start":    "1:00",
-    "duration": 30,
+    "duration": 45,
     "notes":    "Funk/brass. Horns expected in other. Tight rhythm section — good bass/drums test."
   },
   {
@@ -36,7 +36,7 @@
     "slug":     "acdc",
     "url":      "https://www.youtube.com/watch?v=pAgnJDJN4VA",
     "start":    "0:20",
-    "duration": 30,
+    "duration": 45,
     "notes":    "Hard rock. Angus's guitar is distinctive — good guitar stem test. Dense low end."
   },
   {
@@ -44,7 +44,7 @@
     "slug":     "love-and-rockets",
     "url":      "https://www.youtube.com/watch?v=-L41MhFPU9s",
     "start":    "0:45",
-    "duration": 30,
+    "duration": 45,
     "notes":    "Post-punk/goth. Heavily effected guitar — will it land in guitar or other?"
   },
   {
@@ -52,7 +52,7 @@
     "slug":     "finger-eleven",
     "url":      "https://www.youtube.com/watch?v=BJk6gZuPKRE",
     "start":    "1:00",
-    "duration": 30,
+    "duration": 45,
     "notes":    "Alt rock. Good all-round separation test — balanced mix of guitar, bass, drums, vocals."
   },
   {
@@ -60,7 +60,7 @@
     "slug":     "metallica",
     "url":      "https://www.youtube.com/watch?v=CD-E-LDc384",
     "start":    "1:30",
-    "duration": 30,
+    "duration": 45,
     "notes":    "Heavy metal. Stress test for drums — fast double-kick, heavy distorted guitar."
   },
   {
@@ -68,7 +68,7 @@
     "slug":     "kendrick",
     "url":      "https://www.youtube.com/watch?v=H58vbez_m4E",
     "start":    "0:45",
-    "duration": 30,
+    "duration": 45,
     "notes":    "Hip-hop. Programmed drums, heavy bass, strong vocal. A minor sample flip intro."
   },
   {
@@ -76,15 +76,31 @@
     "slug":     "teddy-swims",
     "url":      "https://www.youtube.com/watch?v=9gWIIIr2Asw",
     "start":    "0:50",
-    "duration": 30,
+    "duration": 45,
     "notes":    "Soul/R&B. Massive vocal, lush production. Good test for vocal isolation quality."
   },
   {
     "name":     "Stick Season — Noah Kahan",
-    "slug":     "noah-kahan",
+    "slug":     "noah-kahan-stick-season",
     "url":      "https://www.youtube.com/watch?v=JKrDdsgXuso",
     "start":    "0:53",
-    "duration": 30,
+    "duration": 45,
     "notes":    "Folk/indie. Acoustic guitar + vocals — good pitch extraction test."
+  },
+  {
+    "name":     "Porchlight — Noah Kahan",
+    "slug":     "noah-kahan-porchlight",
+    "url":      "https://www.youtube.com/watch?v=ZhWTiZiTB7Y",
+    "start":    "0:57",
+    "duration": 45,
+    "notes":    "Folk/indie. Second Noah Kahan track."
+  },
+  {
+    "name":     "Tongue Tied — Grouplove",
+    "slug":     "grouplove",
+    "url":      "https://www.youtube.com/watch?v=1x1wjGKHjBI",
+    "start":    "1:45",
+    "duration": 45,
+    "notes":    "Indie pop/rock. High energy, dense mix."
   }
 ]

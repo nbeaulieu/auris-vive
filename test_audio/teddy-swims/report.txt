@@ -1,17 +1,17 @@
 Auris Vive — Stem Analysis Report
-Generated: 2026-03-19 22:55:49
+Generated: 2026-03-20 09:43:08
 Track:     teddy-swims
-Source:    /Users/nicole/dev/auris-vive/test_audio/teddy-swims/clip.wav
-Duration:  30.00s
+Source:    test_audio/teddy-swims/clip.wav
+Duration:  45.00s
 BPM:       161.5
 Device:    mps
-Time:      32.2s
+Time:      47.8s
 
 stem            peak       rms   isolation  note
 --------------------------------------------------------------
-bass          0.7821    0.1845      0.4836  strong
-drums         1.0934    0.2118      0.5551  strong
-guitar        0.6651    0.0544      0.1426  present
-other         0.8400    0.1124      0.2946  present
-piano         0.6305    0.0500      0.1311  present
-vocals        1.1435    0.1931      0.5060  strong
+bass          0.7747    0.1762      0.4745  strong
+drums         1.0642    0.2191      0.5899  strong
+guitar        0.9766    0.0603      0.1624  present
+other         0.9962    0.1058      0.2848  present
+piano         0.6298    0.0438      0.1179  present
+vocals        1.1345    0.1853      0.4990  strong

@@ -1,0 +1,17 @@
+Auris Vive — Stem Analysis Report
+Generated: 2026-03-20 09:45:23
+Track:     noah-kahan-stick-season
+Source:    test_audio/noah-kahan-stick-season/clip.wav
+Duration:  45.00s
+BPM:       117.5
+Device:    mps
+Time:      60.7s
+
+stem            peak       rms   isolation  note
+--------------------------------------------------------------
+bass          0.0014    0.0001      0.0006  silent
+drums         0.9950    0.0558      0.2440  present
+guitar        0.9862    0.1141      0.4989  strong
+other         0.9277    0.1143      0.4997  strong
+piano         0.0016    0.0001      0.0005  silent
+vocals        0.9573    0.1829      0.7993  strong
