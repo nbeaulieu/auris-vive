@@ -34,8 +34,10 @@ export class AudioEngine {
   /** Load individual stem MP3s for synchronized multi-track playback. */
   async loadStems(baseUrl: string, stemNames: string[]): Promise<void> {
     this.stop();
-    if (!this.ctx) this.ctx = new AudioContext();
+    this.ctx = new AudioContext();
 
+    this.mixBuffer = null;
+    this.mixSource = null;
     this.stems.clear();
     this._mode = 'stems';
 
